@@ -9,7 +9,7 @@ namespace Golf_v1._0
 {
     public enum GameState
     {
-
+        Menu,Multiplayer,SinglePlayer,ChoseVect,ChosePower,Rolling, Info, GameOver, Exit
     }
     public class Game1 : Game
     {
