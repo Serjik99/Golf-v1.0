@@ -8,6 +8,7 @@ using System;
 namespace Golf_v1_0
 {
     class Score
-{
-}
+    {
+
+    }
 }
