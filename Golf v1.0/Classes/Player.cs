@@ -31,8 +31,9 @@ namespace Golf_v1._0
         }
         public void DrawAngle(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(texture, new Rectangle(100, 100,20, 20), null, Color.White, angle, new Vector2(texture.Width / 2, texture.Height / 2), SpriteEffects.None, 1f);
+            spriteBatch.Draw(texture, new Rectangle(100, 100,20, 20), null, Color.White, angle, new Vector2(texture.Width,texture.Height/2), SpriteEffects.None, 1f);
         }
+        public void
         public void Update(GameTime gameTime)
         {
             if (keyboardState.IsKeyDown(Keys.L))
