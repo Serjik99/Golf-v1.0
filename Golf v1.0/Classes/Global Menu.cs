@@ -5,15 +5,17 @@ using Microsoft.Xna.Framework.Content;
 using System.Collections.Generic;
 using Golf_v1._0;
 
+
 namespace Golf_v1._0
 {
-    public class Menu
+    public class Global_Menu
     {
         KeyboardState keyboardState;
+        KeyboardState prevState;
         SpriteFont spriteFont;
         List<string> buttonList;
         int selected;
-        public Menu()
+        public Global_Menu()
         {
             buttonList = new List<string>();
             selected = 0;
@@ -31,7 +33,7 @@ namespace Golf_v1._0
         {
             keyboardState = Keyboard.GetState();
 
-            if (keyboardState.IsKeyUp(Keys.S) && keyboardState.IsKeyDown(Keys.S))
+            if (keyboardState.IsKeyDown(Keys.S) && keyboardState!=prevState)
             {
                 if (selected < buttonList.Count - 1)
                 {
@@ -39,7 +41,7 @@ namespace Golf_v1._0
                 }
             }
 
-            if (keyboardState.IsKeyUp(Keys.W) && keyboardState.IsKeyDown(Keys.W))
+            if (keyboardState.IsKeyDown(Keys.W) && keyboardState != prevState)
             {
                 if (selected > 0)
                 {
@@ -48,22 +50,22 @@ namespace Golf_v1._0
             }
 
             // Активация выбора в меню
-            /*if (keyboardState.IsKeyDown(Keys.Enter))
+            if (keyboardState.IsKeyDown(Keys.Enter))
             {
                 switch (selected)
                 {
                     case 0:             // Start Play
-                        Game1.gameState = GameState.Playing;
+                        Game1.gameState = GameState.SinglePlayer ;
                         break;
                     case 1:             // Info
-                        Game1.gameState = GameState.Info;
+                        Game1.gameState = GameState.Multiplayer;
                         break;
                     case 2:             // Exit
                         Game1.gameState = GameState.Exit;
                         break;
                 }
-            }*/
-
+            }
+            prevState = keyboardState;
 
         }
 

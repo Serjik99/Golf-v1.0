@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Content;
 using System.Collections.Generic;
 using System;
 
-namespace Golf_v1_0
+namespace Golf_v1._0
 {
     class Score
     {

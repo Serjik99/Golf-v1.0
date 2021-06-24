@@ -25,3 +25,10 @@
 /processorParam:TextureFormat=Color
 /build:Ball(0).png
 
+#begin GameFont.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:GameFont.spritefont
+

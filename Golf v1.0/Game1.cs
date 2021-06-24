@@ -17,7 +17,8 @@ namespace Golf_v1._0
         private SpriteBatch _spriteBatch;
         GraphicsDeviceManager graphics;
         Ball ball = new Ball(new Vector2(250, 800));
-
+        public static GameState gameState = GameState.Menu;
+        public Global_Menu gmenu = new Global_Menu();
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -39,7 +40,7 @@ namespace Golf_v1._0
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             ball.LoadContent(Content);
-
+            gmenu.LoadContent(Content);
             // TODO: use this.Content to load your game content here
         }
 
@@ -48,21 +49,56 @@ namespace Golf_v1._0
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-           
+            switch (gameState)
+            {
+                case GameState.Menu:
+                    UpdateMenu(gameTime);
+                    break;
+                case GameState.Info:
+                    
+                    break;
+                
+            }
 
             base.Update(gameTime);
         }
-
+        private void UpdateMenu(GameTime gameTime)
+        {
+            gmenu.Update(gameTime);
+        }
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.ForestGreen);
 
+          
             _spriteBatch.Begin();
+            {
+               
+                switch (gameState)
+                {
+                    case GameState.Menu:
+                        DrawGlobalMenu(_spriteBatch);
+                        break;
+                    case GameState.Info:
+                       
+                        break;
+                    case GameState.SinglePlayer:
+                        
+                        break;
+                    case GameState.GameOver:
+                        
+                        break;
+                }
+            }
 
             ball.Draw(_spriteBatch);
             _spriteBatch.End();
 
             base.Draw(gameTime);
+        }
+        private void DrawGlobalMenu(SpriteBatch spriteBatch)
+        {
+            gmenu.Draw(spriteBatch);
         }
     }
 }
