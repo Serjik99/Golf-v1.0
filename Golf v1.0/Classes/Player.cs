@@ -12,7 +12,15 @@ namespace Golf_v1_0
     {
         double timeTick;
         int score;
-        float force;
+        int speed;
         Vector2 direction;
+        Vector2 position;
+        Texture2D texture;
+
+        public Player()
+        {
+
+        }
+
     }
 }

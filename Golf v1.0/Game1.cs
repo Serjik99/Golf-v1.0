@@ -16,6 +16,7 @@ namespace Golf_v1._0
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         GraphicsDeviceManager graphics;
+        Ball ball = new Ball(new Vector2(250, 800));
 
         public Game1()
         {
@@ -29,6 +30,7 @@ namespace Golf_v1._0
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
+           
 
             base.Initialize();
         }
@@ -36,6 +38,7 @@ namespace Golf_v1._0
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
+            ball.LoadContent(Content);
 
             // TODO: use this.Content to load your game content here
         }
@@ -52,9 +55,12 @@ namespace Golf_v1._0
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.ForestGreen);
 
-            // TODO: Add your drawing code here
+            _spriteBatch.Begin();
+
+            ball.Draw(_spriteBatch);
+            _spriteBatch.End();
 
             base.Draw(gameTime);
         }
