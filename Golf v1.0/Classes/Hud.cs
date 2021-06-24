@@ -3,8 +3,8 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Content;
 using System.Collections.Generic;
-using Golf_v1._0;
-namespace Golf_v1._0
+using Golf_v1_0;
+namespace Golf_v1_0
 {
     class Hud
     {

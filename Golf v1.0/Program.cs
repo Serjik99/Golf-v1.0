@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Golf_v1._0
+namespace Golf_v1_0
 {
     public static class Program
     {

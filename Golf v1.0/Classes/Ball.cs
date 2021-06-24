@@ -5,17 +5,19 @@ using Microsoft.Xna.Framework.Content;
 using System.Collections.Generic;
 using System;
 
-namespace Golf_v1._0
+
+namespace Golf_v1_0
 {
     class Ball
     {
-        int force;
+        double force;
         Vector2 speed;
-        int acceleration;
+        double acceleration = 0.1;
         Vector2 position;
         Texture2D texture;
         double timeTick;
         Rectangle boundingBox;
+        Rectangle[] colisions;
         int textureNumber = 0;
         public Vector2 Position
         {
@@ -29,7 +31,6 @@ namespace Golf_v1._0
         public Ball(Vector2 position)
         {
             this.position = position;
-            
         }
 
         public void LoadContent(ContentManager content)
@@ -43,7 +44,55 @@ namespace Golf_v1._0
         }
         public void Update()
         {
+            if((position + speed).X <= 500 - boundingBox.Width && (position + speed).Y <= 1000 - boundingBox.Height && (position + speed).X >= 0 && (position + speed).Y >= 0)
+            {
+                position += speed;
+                boundingBox.X = (int)position.X;
+                boundingBox.Y = (int)position.Y;
+            }
+            if((position + speed).X > 500 - boundingBox.Width || (position + speed).X < 0)
+            {
+                speed.X = -speed.X;
+            }
+            if((position + speed).Y > 1000 - boundingBox.Height || (position + speed).Y < 0)
+            {
+                speed.Y = -speed.Y;
+            }
+            if(speed.Y < 0)
+            {
+                speed.Y += (float)acceleration;
+            }
+            else if(speed.Y > 0)
+            {
+                speed.Y -= (float)acceleration;
+            }
+            if(speed.X < 0)
+            {
+                speed.X += (float)acceleration;
+            }
+            else if(speed.X > 0)
+            {
+                speed.X -= (float)acceleration;
+            }
+            if(Math.Abs(speed.X) < 0.1 )
+            {
+                speed.X = 0;
+            }
+            if(Math.Abs(speed.Y) < 0.1)
+            {
+                speed.Y = 0;
+            }
+            //foreach()
+            //{
+
+            //}
             
         }
+        public void SetSpeed(float angle , double force)
+        {
+            speed.X = (float)(Math.Sin(angle) * force);
+            speed.Y = (float)(Math.Cos(angle) * force);
+        }
+        
     }   
 }
