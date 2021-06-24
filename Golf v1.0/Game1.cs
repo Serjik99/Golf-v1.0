@@ -9,10 +9,20 @@ namespace Golf_v1._0
 {
     public enum GameState
     {
-        Menu,Multiplayer,SinglePlayer,ChoseVect,ChosePower,Rolling, Info, GameOver, Exit
+        Menu,Multiplayer, MultiplayerMenu, SinglePlayerMenu, SinglePlayer,ChoseVect,ChosePower,Rolling,GameOver, Exit,
+        
     }
     public class Game1 : Game
     {
+        private List<string> gmenuList = new List<string>() {
+                "SinglePlayer","Multiplayer","Exit"
+            };
+        private List<string> singlePlList = new List<string>() {
+                "Play","Exit"
+            };
+        private List<string> multiPlList = new List<string>() {
+                "Connect","Exit"
+            };
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         GraphicsDeviceManager graphics;
@@ -52,38 +62,44 @@ namespace Golf_v1._0
             switch (gameState)
             {
                 case GameState.Menu:
-                    UpdateMenu(gameTime);
+                    UpdateMenu(gameTime,gmenuList);
                     break;
-                case GameState.Info:
+                case GameState.SinglePlayerMenu:
+                    UpdateMenu(gameTime,singlePlList);
+                    break;
+                case GameState.MultiplayerMenu:
+                    UpdateMenu(gameTime,multiPlList);
+                    break;
+                case GameState.Exit:
+                    this.Exit();
                     
                     break;
-                
+
             }
 
             base.Update(gameTime);
         }
-        private void UpdateMenu(GameTime gameTime)
+        private void UpdateMenu(GameTime gameTime,List<string> blist)
         {
-            gmenu.Update(gameTime);
+            gmenu.Update(gameTime,blist);
         }
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.ForestGreen);
-
-          
+            
             _spriteBatch.Begin();
             {
                
                 switch (gameState)
                 {
                     case GameState.Menu:
-                        DrawGlobalMenu(_spriteBatch);
+                        DrawGlobalMenu(_spriteBatch,gmenuList);
                         break;
-                    case GameState.Info:
-                       
+                    case GameState.SinglePlayerMenu:
+                        DrawGlobalMenu(_spriteBatch, singlePlList);
                         break;
-                    case GameState.SinglePlayer:
-                        
+                    case GameState.MultiplayerMenu:
+                        DrawGlobalMenu(_spriteBatch, multiPlList);
                         break;
                     case GameState.GameOver:
                         
@@ -96,9 +112,10 @@ namespace Golf_v1._0
 
             base.Draw(gameTime);
         }
-        private void DrawGlobalMenu(SpriteBatch spriteBatch)
+        private void DrawGlobalMenu(SpriteBatch spriteBatch,List<string> blist)
         {
-            gmenu.Draw(spriteBatch);
+            
+            gmenu.Draw(spriteBatch,blist);
         }
     }
 }

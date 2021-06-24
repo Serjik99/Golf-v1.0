@@ -13,67 +13,102 @@ namespace Golf_v1._0
         KeyboardState keyboardState;
         KeyboardState prevState;
         SpriteFont spriteFont;
-        List<string> buttonList;
+        
         int selected;
         public Global_Menu()
         {
-            buttonList = new List<string>();
             selected = 0;
-            buttonList.Add("SinglePlayer");
-            buttonList.Add("Multiplayer");
-            buttonList.Add("Info");
-            buttonList.Add("Exit");
+            
 
         }
         public void LoadContent(ContentManager content)
         {
             spriteFont = content.Load<SpriteFont>("GameFont");
         }
-        public void Update(GameTime gameTime)
+        public void Update(GameTime gameTime,List<string> blist)
         {
             keyboardState = Keyboard.GetState();
 
             if (keyboardState.IsKeyDown(Keys.S) && keyboardState!=prevState)
             {
-                if (selected < buttonList.Count - 1)
+                if (selected < blist.Count - 1)
                 {
                     selected++;
                 }
             }
 
-            if (keyboardState.IsKeyDown(Keys.W) && keyboardState != prevState)
+            if (keyboardState.IsKeyDown(Keys.W) && keyboardState!=prevState)
             {
                 if (selected > 0)
                 {
                     selected--;
                 }
             }
-
-            // Активация выбора в меню
-            if (keyboardState.IsKeyDown(Keys.Enter))
+            if (Game1.gameState == GameState.Menu)
             {
-                switch (selected)
+                if (keyboardState.IsKeyDown(Keys.Enter) && keyboardState != prevState)
                 {
-                    case 0:             // Start Play
-                        Game1.gameState = GameState.SinglePlayer ;
-                        break;
-                    case 1:             // Info
-                        Game1.gameState = GameState.Multiplayer;
-                        break;
-                    case 2:             // Exit
-                        Game1.gameState = GameState.Exit;
-                        break;
+                    switch (selected)
+                    {
+                        case 0:             // Start Play
+                            Game1.gameState = GameState.SinglePlayerMenu;
+                            break;
+                        case 1:             // Info
+                            Game1.gameState = GameState.MultiplayerMenu;
+                            break;
+                        case 2:             // Exit
+                            Game1.gameState = GameState.Exit;
+                            break;
+                    }
                 }
+                prevState = keyboardState;
             }
-            prevState = keyboardState;
+            else if (Game1.gameState == GameState.SinglePlayerMenu && keyboardState != prevState)
+            {
+                if (keyboardState.IsKeyDown(Keys.Enter))
+                {
+                    switch (selected)
+                    {
+                        case 0:             
+                            Game1.gameState = GameState.SinglePlayer;
+                            break;    
+                        case 1:             
+                            Game1.gameState = GameState.Exit;
+                            break;
+                    }
+                }
+                prevState = keyboardState;
+            }
+            else if (Game1.gameState == GameState.MultiplayerMenu && keyboardState!=prevState)
+            {
+                if (keyboardState.IsKeyDown(Keys.Enter))
+                {
+                    switch (selected)
+                    {
+                      
+                        case 0:             // Info
+                            Game1.gameState = GameState.Multiplayer;
+                            break;
+                        case 1:             // Exit
+                            Game1.gameState = GameState.Exit;
+                            break;
+                    }
+                }
+                prevState = keyboardState;
+            }
+            // Активация выбора в меню
+
 
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+
+
+        public void Draw(SpriteBatch spriteBatch,List<string> blist)
         {
+            
             Color color;
 
-            for (int i = 0; i < buttonList.Count; i++)
+            for (int i = 0; i < blist.Count; i++)
             {
                 if (selected == i)
                 {
@@ -86,11 +121,12 @@ namespace Golf_v1._0
 
                 spriteBatch.DrawString
                 (
-                    spriteFont, buttonList[i],
+                    spriteFont, blist[i],
                     new Vector2(100, 20 * i), color
                 );
             }
 
         }
+      
     }
 }
