@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Content;
 using System.Collections.Generic;
 using Golf_v1._0;
-
+using System.Windows.Forms;
 
 namespace Golf_v1._0
 {
@@ -29,7 +29,7 @@ namespace Golf_v1._0
         {
             keyboardState = Keyboard.GetState();
 
-            if (keyboardState.IsKeyDown(Keys.S) && keyboardState!=prevState)
+            if (keyboardState.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.S) && keyboardState!=prevState)
             {
                 if (selected < blist.Count - 1)
                 {
@@ -37,7 +37,7 @@ namespace Golf_v1._0
                 }
             }
 
-            if (keyboardState.IsKeyDown(Keys.W) && keyboardState!=prevState)
+            if (keyboardState.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.W) && keyboardState!=prevState)
             {
                 if (selected > 0)
                 {
@@ -46,8 +46,8 @@ namespace Golf_v1._0
             }
             if (Game1.gameState == GameState.Menu)
             {
-                if (keyboardState.IsKeyDown(Keys.Enter) && keyboardState != prevState)
-                {
+                if (keyboardState.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.Enter) && keyboardState != prevState)
+                { 
                     switch (selected)
                     {
                         case 0:             // Start Play
@@ -57,6 +57,9 @@ namespace Golf_v1._0
                             Game1.gameState = GameState.MultiplayerMenu;
                             break;
                         case 2:             // Exit
+                            PlayMP3();
+                            break;
+                        case 3:
                             Game1.gameState = GameState.Exit;
                             break;
                     }
@@ -65,12 +68,13 @@ namespace Golf_v1._0
             }
             else if (Game1.gameState == GameState.SinglePlayerMenu && keyboardState != prevState)
             {
-                if (keyboardState.IsKeyDown(Keys.Enter))
+                if (keyboardState.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.Enter))
                 {
                     switch (selected)
                     {
-                        case 0:             
-                            Game1.gameState = GameState.SinglePlayer;
+                        case 0:
+                            Game1.gameType = GameType.SinglePlayer;
+                            Game1.gameState = GameState.ChoseVect;
                             break;    
                         case 1:             
                             Game1.gameState = GameState.Exit;
@@ -81,13 +85,14 @@ namespace Golf_v1._0
             }
             else if (Game1.gameState == GameState.MultiplayerMenu && keyboardState!=prevState)
             {
-                if (keyboardState.IsKeyDown(Keys.Enter))
+                if (keyboardState.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.Enter))
                 {
                     switch (selected)
                     {
                       
-                        case 0:             // Info
-                            Game1.gameState = GameState.Multiplayer;
+                        case 0:
+                            Game1.gameType = GameType.SinglePlayer;// Info
+                            Game1.gameState = GameState.ChoseVect;
                             break;
                         case 1:             // Exit
                             Game1.gameState = GameState.Exit;
@@ -96,8 +101,7 @@ namespace Golf_v1._0
                 }
                 prevState = keyboardState;
             }
-            // Активация выбора в меню
-
+           
 
         }
 
@@ -126,6 +130,30 @@ namespace Golf_v1._0
                 );
             }
 
+        }
+        private void PlayMP3()
+        {
+            
+            var filePath = string.Empty;
+
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+                openFileDialog.InitialDirectory = "c:\\";
+                openFileDialog.Filter = "mp3 files (*.mp3)|*.mp3";
+                openFileDialog.FilterIndex = 2;
+                openFileDialog.RestoreDirectory = true;
+
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    //Get the path of specified file
+                    filePath = openFileDialog.FileName;
+
+
+                    Game1.path = filePath;
+                    Game1.PlayMus(filePath);
+
+                }
+            }
         }
       
     }
