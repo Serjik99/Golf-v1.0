@@ -7,6 +7,10 @@ using System;
 
 namespace Golf_v1._0
 {
+    public enum GameState
+    {
+
+    }
     public class Game1 : Game
     {
         private GraphicsDeviceManager _graphics;
