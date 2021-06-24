@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Content;
 using System.Collections.Generic;
-using Golf_v1._0;
+using Golf_v1_0;
 
 namespace Golf_v1_0
 {
@@ -53,13 +53,13 @@ namespace Golf_v1_0
                 switch (selected)
                 {
                     case 0:             // Start Play
-                        Game1.gameState = GameState.Playing;
+                        //Game1.gameState = GameState.Playing;
                         break;
                     case 1:             // Info
-                        Game1.gameState = GameState.Info;
+                       // Game1.gameState = GameState.Info;
                         break;
                     case 2:             // Exit
-                        Game1.gameState = GameState.Exit;
+                        //Game1.gameState = GameState.Exit;
                         break;
                 }
             }

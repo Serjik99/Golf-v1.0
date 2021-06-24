@@ -8,6 +8,7 @@ using System;
 
 namespace Golf_v1_0
 {
+
     class Player
     {
         double timeTick;
@@ -16,6 +17,7 @@ namespace Golf_v1_0
         Vector2 direction;
         Vector2 position;
         Texture2D texture;
+        
 
         public Player()
         {
