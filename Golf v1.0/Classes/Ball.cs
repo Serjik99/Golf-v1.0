@@ -82,6 +82,11 @@ namespace Golf_v1_0
             {
                 speed.Y = 0;
             }
+            //foreach()
+            //{
+
+            //}
+            
         }
         public void SetSpeed(float angle , double force)
         {

@@ -35,7 +35,7 @@ namespace Golf_v1_0
         {
             spriteBatch.Draw(texture, new Rectangle(100, 100,20, 20), null, Color.White, angle, new Vector2(texture.Width,texture.Height/2), SpriteEffects.None, 1f);
         }
-        public void
+        
         public void Update(GameTime gameTime)
         {
             if (keyboardState.IsKeyDown(Keys.L))

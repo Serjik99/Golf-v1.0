@@ -62,7 +62,7 @@ namespace Golf_v1_0
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             gameState = GameState.Menu;
             //delete later
-            ball.SetSpeed((float)Math.PI / 3, 20);
+            ball.SetSpeed((float)Math.PI / 9, 20);
             ball.LoadContent(Content);
             //gmenu.LoadContent(Content);
             player.LoadContent(Content);
