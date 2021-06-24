@@ -19,7 +19,7 @@ namespace Golf_v1._0
         Vector2 direction;
         Vector2 position;
         Texture2D texture;
-
+        Rectangle f = new Rectangle(100, 100, 20, 20);
         public Player()
         {
 
@@ -31,21 +31,19 @@ namespace Golf_v1._0
         }
         public void DrawAngle(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(texture, new Rectangle(100, 100,20, 20), null, Color.White, angle, new Vector2(texture.Width,texture.Height/2), SpriteEffects.None, 1f);
+            spriteBatch.Draw(texture,f , null, Color.White, angle, new Vector2(texture.Width,texture.Height/2), SpriteEffects.None, 1f);
         }
-        public void
-        public void Update(GameTime gameTime)
-        {
-            if (keyboardState.IsKeyDown(Keys.L))
-            {
-                Game1.gameState = GameState.ChosePower;
-            }
-            else
-            {
+       
+        public void UpdateAngle(GameTime gameTime)
+        {         
                 angle += 0.01f;
-            }
-            
-            prevState = keyboardState;
+        }
+        double ticks = 0;
+        public void Update(GameTime gametime)
+        {
+            double c = (Math.Sin(ticks / 10)+1) * 10;
+            f.Width = 20 +(int)c;
+            ticks++;
         }
     }
 }

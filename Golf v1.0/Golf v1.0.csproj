@@ -20,4 +20,9 @@
   <ItemGroup>
     <MonoGameContentReference Include="Content\Content.mgcb" />
   </ItemGroup>
+  <ItemGroup>
+    <Reference Include="MyLibrary">
+      <HintPath>..\..\..\..\..\Downloads\MyLibrary.dll</HintPath>
+    </Reference>
+  </ItemGroup>
 </Project>

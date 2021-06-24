@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Content;
 using System.Collections.Generic;
 using Golf_v1._0;
 using System.Windows.Forms;
-
+using MyLibrary;
 namespace Golf_v1._0
 {
     public class Global_Menu
@@ -13,7 +13,9 @@ namespace Golf_v1._0
         KeyboardState keyboardState;
         KeyboardState prevState;
         SpriteFont spriteFont;
-        
+
+        ButtonWithRectangle button = new ButtonWithRectangle(new Rectangle(0,0,50,50));
+
         int selected;
         public Global_Menu()
         {
@@ -24,6 +26,11 @@ namespace Golf_v1._0
         public void LoadContent(ContentManager content)
         {
             spriteFont = content.Load<SpriteFont>("GameFont");
+            /*касывые кнопаки
+             * button.LoadContent("");
+            button.Button.OnLeftClick = () => {
+            
+            };*/
         }
         public void Update(GameTime gameTime,List<string> blist)
         {
@@ -59,6 +66,7 @@ namespace Golf_v1._0
                         case 2:             // Exit
                             PlayMP3();
                             break;
+                           
                         case 3:
                             Game1.gameState = GameState.Exit;
                             break;
@@ -77,6 +85,9 @@ namespace Golf_v1._0
                             Game1.gameState = GameState.ChoseVect;
                             break;    
                         case 1:             
+                            Game1.gameState = GameState.Menu;
+                            break;
+                        case 2:
                             Game1.gameState = GameState.Exit;
                             break;
                     }
@@ -91,10 +102,13 @@ namespace Golf_v1._0
                     {
                       
                         case 0:
-                            Game1.gameType = GameType.SinglePlayer;// Info
+                            Game1.gameType = GameType.Multiplayer;// Info
                             Game1.gameState = GameState.ChoseVect;
                             break;
-                        case 1:             // Exit
+                        case 1:
+                            Game1.gameState = GameState.Menu;
+                            break;
+                        case 2:
                             Game1.gameState = GameState.Exit;
                             break;
                     }
