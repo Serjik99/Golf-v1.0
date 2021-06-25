@@ -11,7 +11,7 @@ namespace Golf_v1_0
 {
     public enum GameState
     {
-        Menu, MultiplayerMenu, SinglePlayerMenu, ChoseVect, ChosePower, Rolling, GameOver, Exit,
+        Menu, MultiplayerMenu, SinglePlayerMenu, ChoseVect, ChosePower, Rolling, GameOver, Exit, Win, Lose, Draw
 
     }
     public enum GameType
@@ -62,7 +62,7 @@ namespace Golf_v1_0
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             gameState = GameState.Menu;
             //delete later
-            ball.SetSpeed((float)Math.PI / 9, 20);
+            ball.SetSpeed((float)Math.PI / 4, 20);
             ball.LoadContent(Content);
             //gmenu.LoadContent(Content);
             player.LoadContent(Content);
@@ -100,7 +100,7 @@ namespace Golf_v1_0
             //  this.Exit();
 
             //break;
-            ball.Update();
+            ball.Update(Content);
 
             //}
 

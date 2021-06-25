@@ -17,7 +17,7 @@ namespace Golf_v1_0
         Texture2D texture;
         double timeTick;
         Rectangle boundingBox;
-        Rectangle[] colisions;
+        Rectangle colision;
         int textureNumber = 0;
         public Vector2 Position
         {
@@ -35,64 +35,95 @@ namespace Golf_v1_0
 
         public void LoadContent(ContentManager content)
         {
-            texture = content.Load <Texture2D>("Ball(0)");
+            texture = content.Load<Texture2D>("balltexture(0)");
             boundingBox = new Rectangle((int)position.X, (int)position.Y, 64, 64);
+            textureNumber = 0;
+            colision = new Rectangle((int)position.X + 10, (int)position.Y + 10, 44, 44);
+
+
+
         }
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(texture, boundingBox, Color.White);
+
+            spriteBatch.Draw(texture, colision, Color.Red);
+
         }
-        public void Update()
+        public void Update(ContentManager content , Rectangle holeColision)
         {
-            if((position + speed).X <= 500 - boundingBox.Width && (position + speed).Y <= 1000 - boundingBox.Height && (position + speed).X >= 0 && (position + speed).Y >= 0)
+            if ((position + speed).X <= 500 - boundingBox.Width && (position + speed).Y <= 1000 - boundingBox.Height && (position + speed).X >= 0 && (position + speed).Y >= 0)
             {
                 position += speed;
                 boundingBox.X = (int)position.X;
                 boundingBox.Y = (int)position.Y;
+
+
+                colision.X = (int)position.X + 10;
+                colision.Y = (int)position.Y + 10;
+
+
+
+                if (speed.X != 0 && speed.Y != 0)
+                {
+                    if (textureNumber == 30)
+                    {
+                        texture = content.Load<Texture2D>("Ball(0)");
+                    }
+                    if (textureNumber == 60)
+                    {
+                        texture = content.Load<Texture2D>("balltexture(0)");
+                        textureNumber = 0;
+                    }
+                }
+                textureNumber++;
             }
-            if((position + speed).X > 500 - boundingBox.Width || (position + speed).X < 0)
+            if ((position + speed).X > 500 - boundingBox.Width || (position + speed).X < 0)
             {
                 speed.X = -speed.X;
             }
-            if((position + speed).Y > 1000 - boundingBox.Height || (position + speed).Y < 0)
+            if ((position + speed).Y > 1000 - boundingBox.Height || (position + speed).Y < 0)
             {
                 speed.Y = -speed.Y;
             }
-            if(speed.Y < 0)
+            if (speed.Y < 0)
             {
                 speed.Y += (float)acceleration;
             }
-            else if(speed.Y > 0)
+            else if (speed.Y > 0)
             {
                 speed.Y -= (float)acceleration;
             }
-            if(speed.X < 0)
+            if (speed.X < 0)
             {
                 speed.X += (float)acceleration;
             }
-            else if(speed.X > 0)
+            else if (speed.X > 0)
             {
                 speed.X -= (float)acceleration;
             }
-            if(Math.Abs(speed.X) < 0.1 )
+            if (Math.Abs(speed.X) < 0.1)
             {
                 speed.X = 0;
             }
-            if(Math.Abs(speed.Y) < 0.1)
+            if (Math.Abs(speed.Y) < 0.1)
             {
                 speed.Y = 0;
             }
-            //foreach()
-            //{
+            for (int i = 0; i < 2; i++)
+            {
+                if (colision.Intersects(holeColision) && speed.X < 3 && speed.Y < 3)
+                {
+                       Game1.gameState = GameState.Win;
+                }
+            }
 
-            //}
-            
         }
-        public void SetSpeed(float angle , double force)
+        public void SetSpeed(float angle, double force)
         {
             speed.X = (float)(Math.Sin(angle) * force);
             speed.Y = (float)(Math.Cos(angle) * force);
         }
-        
-    }   
+
+    }
 }
