@@ -10,11 +10,37 @@ namespace Golf_v1_0
     {
         private SpriteFont spriteFont;
         private int score;
-        private int angle;
-        private int power;
         private Vector2 position;
-        private int scorewidth;
-        private Rectangle ScoreDestionationRectangle;
+        public Hud()
+        {
+            //Score
+            score = 0;
+            position = new Vector2(10, 10);
+            //Health
+          
+        }
+        public void Update(GameTime gameTime)
+        {
+            score = 100;
+   
+        }
+        public void LoadContent(ContentManager content)
+        {
+            spriteFont = content.Load<SpriteFont>("GameFont");
+            
+        }
+
+        public void Draw(SpriteBatch spriteBatch)
+        {
+            Color color =  Color.Aqua;
+            // Score
+            spriteBatch.DrawString
+                (
+                    spriteFont, "Score:"+score.ToString(),
+                    position, color
+                );
+
+        }
         
     }
 }
