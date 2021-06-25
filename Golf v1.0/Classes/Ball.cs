@@ -114,9 +114,11 @@ namespace Golf_v1_0
             }
             for (int i = 0; i < 2; i++)
             {
-                if (colision.Intersects(holeColision) && speed.X < 3 && speed.Y < 3)
+                if (colision.Intersects(holeColision) )
                 {
                        Game1.gameState = GameState.Win;
+                       texture = content.Load<Texture2D>("golfBall(0)");
+                    speed = new Vector2(0, 0);
                 }
             }
 

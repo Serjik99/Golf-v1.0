@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using Golf_v1_0;
 using System.Windows.Forms;
 
-using MyLibrary;
+//using MyLibrary;
 
 
 
@@ -19,7 +19,7 @@ namespace Golf_v1_0
         KeyboardState prevState;
         SpriteFont spriteFont;
         
-        ButtonWithRectangle button = new ButtonWithRectangle(new Rectangle(0,0,50,50));
+  //      ButtonWithRectangle button = new ButtonWithRectangle(new Rectangle(0,0,50,50));
 
         int selected;
         public Global_Menu()

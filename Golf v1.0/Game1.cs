@@ -9,6 +9,7 @@ using System.IO;
 
 namespace Golf_v1_0
 {
+    //Random random = new Random();
     public enum GameState
     {
         Menu, MultiplayerMenu, SinglePlayerMenu, ChoseVect, ChosePower, Rolling, GameOver, Exit, Win, Lose, Draw
@@ -35,12 +36,13 @@ namespace Golf_v1_0
         private Hud hud = new Hud();
         public static string  path;
         GraphicsDeviceManager graphics;
-        Ball ball = new Ball(new Vector2(250, 800));
+        Ball ball = new Ball(new Vector2(100, 800));
         public static GameState gameState = GameState.Menu;
         public static GameType gameType = GameType.None;
         public Global_Menu gmenu = new Global_Menu();
         private Player player;
         public static bool IsMusPlaying;
+        Hole lunk = new Hole(new Vector2(100 , 100));
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -63,7 +65,8 @@ namespace Golf_v1_0
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             gameState = GameState.Menu;
             //delete later
-            ball.SetSpeed((float)Math.PI / 4, 20);
+            lunk.LoadContent(Content);
+            ball.SetSpeed((float)Math.PI / 3, 50);
             ball.LoadContent(Content);
             gmenu.LoadContent(Content);
             player = new Player((int)ball.position.X+ball.texture.Width, (int)ball.position.Y + ball.texture.Height);
@@ -89,9 +92,9 @@ namespace Golf_v1_0
                 Exit();
             KeyboardState keyboardState = Keyboard.GetState();
             KeyboardState prevState = Keyboard.GetState();
-            if (keyboardState.IsKeyDown(Keys.RightAlt)&&IsMusPlaying==true)
-            {
-                PauseMus();
+           // if (keyboardState.IsKeyDown(Keys.RightAlt)&&IsMusPlaying==true)
+            //{
+              //  PauseMus();
 
             //switch (gameState)
             //{
@@ -113,9 +116,9 @@ namespace Golf_v1_0
             //  this.Exit();
 
             //break;
-            ball.Update(Content);
+            ball.Update(Content , lunk.GetColision());
 
-            }
+            //}
             
             base.Update(gameTime);
         }
@@ -143,7 +146,7 @@ namespace Golf_v1_0
             _spriteBatch.Begin();
             {
                
-                switch (gameState)
+              /*  switch (gameState)
                 {
                     case GameState.Menu:
                         DrawGlobalMenu(_spriteBatch,gmenuList);
@@ -165,10 +168,11 @@ namespace Golf_v1_0
                     case GameState.GameOver:
                         
                         break;
-                }
+                } */
             }
             
             ball.Draw(_spriteBatch);
+            lunk.Draw(_spriteBatch);
             _spriteBatch.End();
 
             base.Draw(gameTime);
