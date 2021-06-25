@@ -15,6 +15,7 @@ namespace Golf_v1_0
         int speed;
         static int x;
         static int y;
+        int width;
         Rectangle rect;
         float angle = (float)Math.PI * 2;
         KeyboardState keyboardState;
@@ -23,10 +24,10 @@ namespace Golf_v1_0
         Vector2 position;
         Texture2D texture;
         
-        public Player(int x,int y)
+        public Player(int x,int y,int w,int h)
         {
-            rect = new Rectangle(x,y, 100, 100);
-
+            rect = new Rectangle(x,y, w, h);
+            width = rect.Width;
         }
         public void LoadContent(ContentManager content)
         {
@@ -44,10 +45,12 @@ namespace Golf_v1_0
                 angle += 0.01f;
         }
         double ticks = 0;
+        
         public void Update(GameTime gametime)
         {
-            double c = (Math.Sin(ticks / 10)+1) *50;
-            rect.Width = 100 +(int)c;
+            
+            double c = (Math.Sin(ticks / 10)+1) *(width/2);
+            rect.Width = width +(int)c;
             ticks++;
         }
     }

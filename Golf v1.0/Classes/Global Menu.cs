@@ -18,8 +18,10 @@ namespace Golf_v1_0
         KeyboardState keyboardState;
         KeyboardState prevState;
         SpriteFont spriteFont;
-        
-        ButtonWithRectangle button = new ButtonWithRectangle(new Rectangle(0,0,50,50));
+        Texture2D menuTexture;
+        Texture2D singlePlTexture;
+        Texture2D mpTExture;
+        ButtonWithRectangle button = new ButtonWithRectangle(new Rectangle(200,200,50,50));
 
         int selected;
         public Global_Menu()
@@ -31,11 +33,10 @@ namespace Golf_v1_0
         public void LoadContent(ContentManager content)
         {
             spriteFont = content.Load<SpriteFont>("GameFont");
-            /*касывые кнопаки
-             * button.LoadContent("");
-            button.Button.OnLeftClick = () => {
-            
-            };*/
+            menuTexture = content.Load<Texture2D>(@"MenuContent\MainMeny");
+            singlePlTexture = content.Load<Texture2D>(@"MenuContent\SinglePlayer");
+            mpTExture = content.Load<Texture2D>(@"MenuContent\MultiPlayer");
+
         }
         public void Update(GameTime gameTime,List<string> blist)
         {
@@ -97,7 +98,7 @@ namespace Golf_v1_0
                             break;
                     }
                 }
-                prevState = keyboardState;
+                
             }
             else if (Game1.gameState == GameState.MultiplayerMenu && keyboardState!=prevState)
             {
@@ -118,10 +119,30 @@ namespace Golf_v1_0
                             break;
                     }
                 }
-                prevState = keyboardState;
+                
             }
-           
+            else if (Game1.gameState == GameState.Pause && keyboardState != prevState)
+            {
+                if (keyboardState.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.Enter))
+                {
+                    switch (selected)
+                    {
 
+                        case 0:
+                            
+                            break;
+                        case 1:
+                            Game1.gameState = GameState.Menu;
+                            break;
+                        case 2:
+                            Game1.gameState = GameState.Exit;
+                            break;
+                    }
+                }
+
+            }
+            prevState = keyboardState;
+           
         }
 
 
@@ -145,8 +166,20 @@ namespace Golf_v1_0
                 spriteBatch.DrawString
                 (
                     spriteFont, blist[i],
-                    new Vector2(100, 20 * i), color
+                    new Vector2(220, 20 * (i+1)), color
                 );
+            }
+            if (Game1.gameState == GameState.Menu)
+            {
+                spriteBatch.Draw(menuTexture,new Vector2(190,20),Color.White);
+            }
+            else if (Game1.gameState == GameState.SinglePlayerMenu)
+            {
+                spriteBatch.Draw(singlePlTexture, new Vector2(190, 20), Color.White);
+            }
+            else if (Game1.gameState == GameState.MultiplayerMenu)
+            {
+                spriteBatch.Draw(mpTExture, new Vector2(190, 20), Color.White);
             }
 
         }
