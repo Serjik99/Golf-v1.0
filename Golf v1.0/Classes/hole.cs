@@ -37,10 +37,16 @@ namespace Golf_v1_0
         {
             position = pos;
         }
+        public void SetTexture(ContentManager content, string texture_name)
+        {
+            texture = content.Load<Texture2D>(texture_name);
+        }
 
         public Rectangle GetColision()
         {
             return colision;
         }
+
+        
     }
 }

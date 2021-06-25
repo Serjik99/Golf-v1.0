@@ -52,7 +52,7 @@ namespace Golf_v1_0
             spriteBatch.Draw(texture, colision, Color.Red);
 
         }
-        public void Update(ContentManager content , Rectangle holeColision)
+        public void Update(ContentManager content , Hole hole)
         {
             if ((position + speed).X <= 500 - boundingBox.Width && (position + speed).Y <= 1000 - boundingBox.Height && (position + speed).X >= 0 && (position + speed).Y >= 0)
             {
@@ -114,10 +114,11 @@ namespace Golf_v1_0
             }
             for (int i = 0; i < 2; i++)
             {
-                if (colision.Intersects(holeColision) )
+                if (colision.Intersects(hole.GetColision()) )
                 {
-                       Game1.gameState = GameState.Win;
-                       texture = content.Load<Texture2D>("golfBall(0)");
+                    Game1.gameState = GameState.Win;
+                    texture = content.Load<Texture2D>("golfBall(0)");
+                    hole.SetTexture(content, "hole_with_ball");
                     speed = new Vector2(0, 0);
                 }
             }
