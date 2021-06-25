@@ -13,8 +13,10 @@ namespace Golf_v1_0
         double force;
         Vector2 speed;
         double acceleration = 0.1;
-        Vector2 position;
-        Texture2D texture;
+        public Vector2 position;
+        
+        public Texture2D texture;
+
         double timeTick;
         Rectangle boundingBox;
         Rectangle[] colisions;

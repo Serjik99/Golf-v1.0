@@ -6,22 +6,26 @@ using System.Collections.Generic;
 using System;
 
 
-namespace Golf_v1._0
+namespace Golf_v1_0
 {
     class Player
     {
         double timeTick;
         int score;
         int speed;
+        static int x;
+        static int y;
+        Rectangle rect;
         float angle = (float)Math.PI * 2;
         KeyboardState keyboardState;
         KeyboardState prevState;
         Vector2 direction;
         Vector2 position;
         Texture2D texture;
-        Rectangle f = new Rectangle(100, 100, 20, 20);
-        public Player()
+        
+        public Player(int x,int y)
         {
+            rect = new Rectangle(x,y, 100, 100);
 
         }
         public void LoadContent(ContentManager content)
@@ -31,7 +35,8 @@ namespace Golf_v1._0
         }
         public void DrawAngle(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(texture,f , null, Color.White, angle, new Vector2(texture.Width,texture.Height/2), SpriteEffects.None, 1f);
+            spriteBatch.Draw(texture,rect , null, Color.White, angle, new Vector2(texture.Width,texture.Height/2), SpriteEffects.None, 1f);
+           
         }
        
         public void UpdateAngle(GameTime gameTime)
@@ -41,8 +46,8 @@ namespace Golf_v1._0
         double ticks = 0;
         public void Update(GameTime gametime)
         {
-            double c = (Math.Sin(ticks / 10)+1) * 10;
-            f.Width = 20 +(int)c;
+            double c = (Math.Sin(ticks / 10)+1) *50;
+            rect.Width = 100 +(int)c;
             ticks++;
         }
     }

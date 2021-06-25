@@ -7,7 +7,7 @@ using System;
 using Microsoft.Xna.Framework.Media;
 using System.IO;
 
-namespace Golf_v1._0
+namespace Golf_v1_0
 {
     public enum GameState
     {
@@ -39,7 +39,8 @@ namespace Golf_v1._0
         public static GameState gameState = GameState.Menu;
         public static GameType gameType = GameType.None;
         public Global_Menu gmenu = new Global_Menu();
-        private Player player = new Player();
+        private Player player;
+        public static bool IsMusPlaying;
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -62,15 +63,22 @@ namespace Golf_v1._0
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             ball.LoadContent(Content);
             gmenu.LoadContent(Content);
+            player = new Player((int)ball.position.X+ball.texture.Width, (int)ball.position.Y + ball.texture.Height);
             player.LoadContent(Content);
             hud.LoadContent(Content);
-          
 
-            // TODO: use this.Content to load your game content here
-        }
+            
+                // TODO: use this.Content to load your game content here
+    }
         public static void PlayMus(string path)
         {
            MediaPlayer.Play(Song.FromUri(Path.GetFileNameWithoutExtension(path), new Uri(path)));
+            IsMusPlaying = true;
+        }
+        public static void PauseMus()
+        {
+            MediaPlayer.Stop();
+            IsMusPlaying = false;
         }
         protected override void Update(GameTime gameTime)
         {
@@ -78,6 +86,15 @@ namespace Golf_v1._0
                 Exit();
             KeyboardState keyboardState = Keyboard.GetState();
             KeyboardState prevState = Keyboard.GetState();
+            if (keyboardState.IsKeyDown(Keys.RightAlt)&&IsMusPlaying==true)
+            {
+                PauseMus();
+
+            }
+            else if (keyboardState.IsKeyDown(Keys.RightAlt) && IsMusPlaying ==false)
+            {
+                PlayMus(path);
+            }
             switch (gameState)
             {
 
