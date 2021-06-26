@@ -49,6 +49,7 @@ namespace Golf_v1_0
         public Global_Menu gmenu = new Global_Menu();
         private Player player;
         public static bool IsMusPlaying;
+        private BackGround back;
         Menu menu = new Menu();
         Hole hole = new Hole(new Vector2(10,10));
 
@@ -64,6 +65,7 @@ namespace Golf_v1_0
             graphics.PreferredBackBufferHeight = Height;
             graphics.PreferredBackBufferWidth = Width;
             ball = new Ball(new Vector2(250, 800), Width , Height );
+            back = new BackGround(Width,Height);
         }
 
         protected override void Initialize()
@@ -82,7 +84,7 @@ namespace Golf_v1_0
             player = new Player() ;
             player.LoadContent(Content);
             hud.LoadContent(Content);
-
+            back.LoadContent(Content);
             
                 // TODO: use this.Content to load your game content here
     }
@@ -128,6 +130,7 @@ namespace Golf_v1_0
                   
                     break;
                 case GameState.ChoseVect:
+                   
                     UpdateAngArrow(gameTime);
                     if (keyboardState.IsKeyDown(Keys.Space))
                     {
@@ -142,7 +145,7 @@ namespace Golf_v1_0
                     }
                     break;
                 case GameState.Pause:
-                    
+           
                     if (keyboardState.IsKeyDown(Keys.Escape) && keyboardState != prevState)
                     {
 
@@ -151,11 +154,12 @@ namespace Golf_v1_0
                     UpdateMenu(gameTime, multiPlList);
                     break;
                 case GameState.ChosePower:
+                    
                     UpdateForcing(gameTime);
                     if (keyboardState.IsKeyDown(Keys.Space) && keyboardState!= prevState)
                     {
                         Game1.gameState = GameState.Rolling;
-                        ball.SetSpeed((float)(Math.PI - player.angle),player.force);
+                        ball.SetSpeed((float)(Math.PI -player.angle),player.force);
                     }
                     if (keyboardState.IsKeyDown(Keys.Escape) && keyboardState != prevState)
                     {
@@ -166,6 +170,7 @@ namespace Golf_v1_0
                     }
                     break;
                 case GameState.Rolling:
+                   
                     ball.Update(Content,hole);
 
                     break;
@@ -214,17 +219,25 @@ namespace Golf_v1_0
                         DrawGlobalMenu(_spriteBatch, multiPlList);
                         break;
                     case GameState.ChoseVect:
+                        DrawBack(_spriteBatch);
                         player.SetPosition((int)ball.position.X + ball.boundingBox.Height / 2, (int)ball.position.Y + ball.boundingBox.Height / 2, 100, 50);
                         DrawAngling(_spriteBatch);
                         DrawHud(_spriteBatch);
                         break;
                     case GameState.ChosePower:
-                        
+
+                        DrawBack(_spriteBatch);
+
                         DrawAngling(_spriteBatch);
                         DrawHud(_spriteBatch);
                         break;
                     case GameState.Pause:
+                        DrawBack(_spriteBatch);
                         DrawGlobalMenu(_spriteBatch, Gpause);
+                        
+                        break;
+                    case GameState.Rolling:
+                        DrawBack(_spriteBatch);
                         break;
                     case GameState.GameOver:
                         
@@ -250,6 +263,10 @@ namespace Golf_v1_0
         private void DrawHud(SpriteBatch spriteBatch)
         {
             hud.Draw(spriteBatch);
+        }
+        private void DrawBack(SpriteBatch spriteBatch)
+        {
+            back.Draw(spriteBatch);
         }
     }
 }

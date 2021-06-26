@@ -203,24 +203,24 @@ namespace Golf_v1_0
                 spriteBatch.DrawString
                 (
                     spriteFont, blist[i],
-                    new Vector2(Game1.Width/2-50, Game1.Height / 2 - 50+(30 * (i))), color
+                    new Vector2(Game1.Width/2- blist.Count * 30, Game1.Height / 2 - blist.Count*30 +(30 * (i))), color
                 );
             }
             if (Game1.gameState == GameState.Menu)
             {
-                spriteBatch.Draw(menuTexture,new Rectangle(Game1.Width/2-110,Game1.Height/2-200,menuTexture.Width*2,menuTexture.Height*2),Color.White);
+                spriteBatch.Draw(menuTexture,new Rectangle(Game1.Width/2-menuTexture.Width,Game1.Height/2-menuTexture.Height*6,menuTexture.Width*2,menuTexture.Height*2),Color.White);
             }
             else if (Game1.gameState == GameState.SinglePlayerMenu)
             {
-                spriteBatch.Draw(singlePlTexture, new Rectangle(Game1.Width/ 2 - 185, Game1.Height / 2 - 200, singlePlTexture.Width * 2, singlePlTexture.Height * 2) , Color.White);
+                spriteBatch.Draw(singlePlTexture, new Rectangle(Game1.Width / 2 - singlePlTexture.Width, Game1.Height / 2 - singlePlTexture.Height * 6, singlePlTexture.Width * 2, singlePlTexture.Height * 2), Color.White);
             }
             else if (Game1.gameState == GameState.MultiplayerMenu)
             {
-                spriteBatch.Draw(mpTExture, new Rectangle(Game1.Width / 2 - 155, Game1.Height / 2 - 200, mpTExture.Width * 2, mpTExture.Height * 2), Color.White);
+                spriteBatch.Draw(mpTExture, new Rectangle(Game1.Width / 2 - mpTExture.Width, Game1.Height / 2 - mpTExture.Height * 6, mpTExture.Width * 2, mpTExture.Height * 2), Color.White);
             }
             else if (Game1.gameState == GameState.Pause)
             {
-                spriteBatch.Draw(PauseTexture, new Rectangle(Game1.Width / 2 - 120, Game1.Height / 2 - 200,PauseTexture.Width * 2, PauseTexture.Height * 2), Color.White);
+                spriteBatch.Draw(PauseTexture, new Rectangle(Game1.Width / 2 - PauseTexture.Width, Game1.Height / 2 - PauseTexture.Height * 6, PauseTexture.Width * 2, PauseTexture.Height * 2), Color.White);
             }
             else if (Game1.gameState == GameState.GameOver)
             {
