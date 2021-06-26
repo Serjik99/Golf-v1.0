@@ -21,8 +21,14 @@ namespace Golf_v1_0
         }
         public void Update(GameTime gameTime)
         {
-            score = 1000000;
-   
+            if(Game1.turn == Turn.Player1)
+            {
+                score = Game1.score1; 
+            }else if(Game1.turn == Turn.Player2)
+            {
+                score = Game1.score2;
+            }
+
         }
         public void LoadContent(ContentManager content)
         {
@@ -34,9 +40,10 @@ namespace Golf_v1_0
         {
             Color color =  Color.Aqua;
             // Score
+        
             spriteBatch.DrawString
                 (
-                    spriteFont, "Score:"+score.ToString(),
+                    spriteFont, "Score:"+score.ToString()+Game1.turn,
                     position, color
                 );
 

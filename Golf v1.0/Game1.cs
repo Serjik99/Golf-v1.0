@@ -24,14 +24,7 @@ namespace Golf_v1_0
     }
     public class Game1 : Game
     {
-        public int Score1()
-        {
-            return score1;
-        }
-        public int Score2()
-        {
-            return score2;
-        }
+        
 
         private List<string> gmenuList = new List<string>() {
                 "SinglePlayer","Multiplayer","CustomizeMusic","Exit"
@@ -64,14 +57,28 @@ namespace Golf_v1_0
         public Global_Menu gmenu = new Global_Menu();
         private Player player;
         public static bool IsMusPlaying;
-        public int score1 = 0;
-        public int score2 = 0;
+        public static int score1 = 0;
+        public static int score2 = 0;
         BackGround back;
         Menu menu = new Menu();
         Hole hole;
         
         public string whoWin;
 
+
+        public int Score(Turn turn)
+        {
+            if(turn == Turn.Player1)
+            {
+                return score1;
+            }
+            else
+            {
+                return score2;
+            }
+            
+        }
+       
 
         public Game1()
         {
@@ -201,6 +208,7 @@ namespace Golf_v1_0
                     this.Exit();
                     break;
                 case GameState.Win:
+                    //вывести вигравшего по очкам плеера
                     break;
 
             }
@@ -245,12 +253,13 @@ namespace Golf_v1_0
                     case GameState.ChoseVect:
                         DrawBack(_spriteBatch);
                         player.SetPosition((int)ball.position.X + ball.boundingBox.Height / 2, (int)ball.position.Y + ball.boundingBox.Height / 2, 100, 50);
+                        ball.Draw(_spriteBatch);
                         DrawAngling(_spriteBatch);
                         DrawHud(_spriteBatch);
                     
                         break;
                     case GameState.ChosePower:
-
+                        ball.Draw(_spriteBatch);
                         DrawBack(_spriteBatch);
 
                         DrawAngling(_spriteBatch);

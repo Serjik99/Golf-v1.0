@@ -16,6 +16,7 @@ namespace Golf_v1_0
         public Vector2 position;
         int y;
         int x;
+        int score;
         
         public Texture2D texture;
 
@@ -53,7 +54,7 @@ namespace Golf_v1_0
         {
             spriteBatch.Draw(texture, boundingBox, Color.White);
 
-            //spriteBatch.Draw(texture, colision, Color.Red);
+            spriteBatch.Draw(texture, colision, Color.Red);
 
         }
         public void Update(ContentManager content , Hole hole)
@@ -120,9 +121,41 @@ namespace Golf_v1_0
             {
                 if (colision.Intersects(hole.GetColision()) )
                 {
+
+                    if(Game1.turn == Turn.Player1)
+                    {
+                        Game1.score1 += score + 100;
+                        if(Game1.score1 >= 1000)
+                        {
+                            Game1.gameState = GameState.Win;
+                        }
+                        Game1.turn = Turn.Player2;
+                        position = new Vector2(250, 800);
+                        boundingBox.X = (int)position.X;
+                        boundingBox.Y = (int)position.Y;
+                        colision.X = (int)position.X + 10;
+                        colision.Y = (int)position.Y + 10;
+
+                    }
+                    else if(Game1.turn == Turn.Player2)
+                    {
+                        Game1.score2 += score + 100;
+                        if (Game1.score2 >= 1000)
+                        {
+                            Game1.gameState = GameState.Win;
+                        }
+                        Game1.turn = Turn.Player1;
+                        position = new Vector2(250, 800);
+                        boundingBox.X = (int)position.X;
+                        boundingBox.Y = (int)position.Y;
+                        colision.X = (int)position.X + 10;
+                        colision.Y = (int)position.Y + 10;
+
+
+                    }
                     
                     texture = content.Load<Texture2D>("golfBall(0)");
-                    hole.SetTexture(content, "hole_with_ball");
+                    //hole.SetTexture(content, "hole_with_ball");
                     speed = new Vector2(0, 0);
                 }
             }
