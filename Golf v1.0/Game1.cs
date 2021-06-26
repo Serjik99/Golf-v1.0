@@ -40,7 +40,7 @@ namespace Golf_v1_0
         GraphicsDeviceManager graphics;
         KeyboardState keyboardState;
         KeyboardState prevState;
-        Ball ball = new Ball(new Vector2(250, 800));
+        Ball ball;
         public static GameState gameState = GameState.Menu;
         public static GameState prevGState = GameState.Menu;
         public static GameType gameType = GameType.None;
@@ -63,6 +63,7 @@ namespace Golf_v1_0
             Height = 1000;
             graphics.PreferredBackBufferHeight = Height;
             graphics.PreferredBackBufferWidth = Width;
+            ball = new Ball(new Vector2(250, 800), Width , Height );
         }
 
         protected override void Initialize()
@@ -154,7 +155,7 @@ namespace Golf_v1_0
                     if (keyboardState.IsKeyDown(Keys.Space) && keyboardState!= prevState)
                     {
                         Game1.gameState = GameState.Rolling;
-                        ball.SetSpeed((float)(player.angle/Math.PI/2),player.force);
+                        ball.SetSpeed((float)(Math.PI - player.angle),player.force);
                     }
                     if (keyboardState.IsKeyDown(Keys.Escape) && keyboardState != prevState)
                     {
