@@ -130,7 +130,10 @@ namespace Golf_v1_0
                   
                     break;
                 case GameState.ChoseVect:
-                    PlayMus(path);
+                    
+                        PlayMus(path);
+
+                    
                     UpdateAngArrow(gameTime);
                     if (keyboardState.IsKeyDown(Keys.Space))
                     {
@@ -145,7 +148,11 @@ namespace Golf_v1_0
                     }
                     break;
                 case GameState.Pause:
-                    PauseMus();
+                    if (path != null)
+                    {
+                        PlayMus(path);
+
+                    }
                     if (keyboardState.IsKeyDown(Keys.Escape) && keyboardState != prevState)
                     {
 
@@ -154,7 +161,11 @@ namespace Golf_v1_0
                     UpdateMenu(gameTime, multiPlList);
                     break;
                 case GameState.ChosePower:
-                    PlayMus(path);
+                    if (path != null)
+                    {
+                        PlayMus(path);
+
+                    }
                     UpdateForcing(gameTime);
                     if (keyboardState.IsKeyDown(Keys.Space) && keyboardState!= prevState)
                     {
@@ -170,7 +181,11 @@ namespace Golf_v1_0
                     }
                     break;
                 case GameState.Rolling:
-                    PlayMus(path);
+                    if (path != null)
+                    {
+                        PlayMus(path);
+
+                    }
                     player.rect.Width = player.texture.Width/ 2;
                     ball.Update(Content,hole);
                     player.rect.Width = player.texture.Width;
