@@ -23,7 +23,8 @@ namespace Golf_v1_0
         Texture2D singlePlTexture;
         Texture2D mpTExture;
         Texture2D PauseTexture;
-        
+        Uri selectSound = new Uri(@"C:\Users\romah\OneDrive\Документы\GitHub\Golf-v1.0\Golf v1.0\Content\MenuContent\3a7ee48dc00822f.mp3");
+        Uri changeSound = new Uri(@"C:\Users\romah\OneDrive\Документы\GitHub\Golf-v1.0\Golf v1.0\Content\MenuContent\button-37a.mp3");
         int selected;
         public Global_Menu()
         {
@@ -49,6 +50,7 @@ namespace Golf_v1_0
                 if (selected < blist.Count - 1)
                 {
                     selected++;
+                    MediaPlayer.Play(Song.FromUri("",changeSound));
                 }
             }
 
@@ -57,6 +59,7 @@ namespace Golf_v1_0
                 if (selected > 0)
                 {
                     selected--;
+                    MediaPlayer.Play(Song.FromUri("", changeSound));
                 }
             }
             if (Game1.gameState == GameState.Menu)
@@ -68,15 +71,15 @@ namespace Golf_v1_0
                         case 0:             // Start Play
                             Game1.gameState = GameState.SinglePlayerMenu;
 
-                            MediaPlayer.Play(Song.FromUri(Path.GetFileNameWithoutExtension(@"C:\Users\romah\OneDrive\Документы\GitHub\Golf-v1.0\Golf v1.0\Content\MenuContent\3a7ee48dc00822f.mp3"), new Uri(@"C:\Users\romah\OneDrive\Документы\GitHub\Golf-v1.0\Golf v1.0\Content\MenuContent\3a7ee48dc00822f.mp3")));
+                            MediaPlayer.Play(Song.FromUri( " ",selectSound));
                             break;
                         case 1:             // Info
                             Game1.gameState = GameState.MultiplayerMenu;
-                            MediaPlayer.Play(Song.FromUri(Path.GetFileNameWithoutExtension(@"C:\Users\romah\OneDrive\Документы\GitHub\Golf-v1.0\Golf v1.0\Content\MenuContent\3a7ee48dc00822f.mp3"), new Uri(@"C:\Users\romah\OneDrive\Документы\GitHub\Golf-v1.0\Golf v1.0\Content\MenuContent\3a7ee48dc00822f.mp3")));
+                            MediaPlayer.Play(Song.FromUri(" ", selectSound));
                             break;
                         case 2:             // Exit
                             PlayMP3();
-                            MediaPlayer.Play(Song.FromUri(Path.GetFileNameWithoutExtension(@"C:\Users\romah\OneDrive\Документы\GitHub\Golf-v1.0\Golf v1.0\Content\MenuContent\3a7ee48dc00822f.mp3"), new Uri(@"C:\Users\romah\OneDrive\Документы\GitHub\Golf-v1.0\Golf v1.0\Content\MenuContent\3a7ee48dc00822f.mp3")));
+                            MediaPlayer.Play(Song.FromUri(" ", selectSound));
                             break;
                            
                         case 3:
@@ -96,12 +99,15 @@ namespace Golf_v1_0
                         case 0:
                             Game1.gameType = GameType.SinglePlayer;
                             Game1.gameState = GameState.ChoseVect;
+                            MediaPlayer.Play(Song.FromUri(" ", selectSound));
                             break;    
                         case 1:             
                             Game1.gameState = GameState.Menu;
+                            MediaPlayer.Play(Song.FromUri(" ", selectSound));
                             break;
                         case 2:
                             Game1.gameState = GameState.Exit;
+                            MediaPlayer.Play(Song.FromUri(" ", selectSound));
                             break;
                     }
                 }
@@ -117,12 +123,15 @@ namespace Golf_v1_0
                         case 0:
                             Game1.gameType = GameType.Multiplayer;// Info
                             Game1.gameState = GameState.ChoseVect;
+                            MediaPlayer.Play(Song.FromUri(" ", selectSound));
                             break;
                         case 1:
                             Game1.gameState = GameState.Menu;
+                            MediaPlayer.Play(Song.FromUri(" ", selectSound));
                             break;
                         case 2:
                             Game1.gameState = GameState.Exit;
+                            MediaPlayer.Play(Song.FromUri(" ", selectSound));
                             break;
                     }
                 }
@@ -138,19 +147,23 @@ namespace Golf_v1_0
                         case 0:
                             
                             Game1.gameState = Game1.prevGState;
+                            MediaPlayer.Play(Song.FromUri(" ", selectSound));
                             break;
                         case 1:
                             if (Game1.gameType == GameType.SinglePlayer)
                             {
                                 Game1.gameState = GameState.SinglePlayerMenu;
+                                MediaPlayer.Play(Song.FromUri(" ", selectSound));
                             }
                             else if (Game1.gameType == GameType.Multiplayer)
                             {
                                 Game1.gameState = GameState.MultiplayerMenu;
+                                MediaPlayer.Play(Song.FromUri(" ", selectSound));
                             }
                             break;
                         case 2:
                             Game1.gameState = GameState.Exit;
+                            MediaPlayer.Play(Song.FromUri(" ", selectSound));
                             break;
                       
                     }
@@ -200,6 +213,10 @@ namespace Golf_v1_0
             else if (Game1.gameState == GameState.Pause)
             {
                 spriteBatch.Draw(PauseTexture, new Rectangle(Game1.Width / 2 - 120, Game1.Height / 2 - 200,PauseTexture.Width * 2, PauseTexture.Height * 2), Color.White);
+            }
+            else if (Game1.gameState == GameState.GameOver)
+            {
+
             }
         }
         private void PlayMP3()

@@ -10,6 +10,6 @@ namespace Golf_v1_0
     {
         public Texture2D texture;
 
-        public BackGround()
+        
     }
 }

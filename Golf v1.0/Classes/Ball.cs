@@ -18,7 +18,7 @@ namespace Golf_v1_0
         public Texture2D texture;
 
         double timeTick;
-        Rectangle boundingBox;
+        public Rectangle boundingBox;
         Rectangle colision;
         int textureNumber = 0;
         public Vector2 Position

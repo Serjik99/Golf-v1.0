@@ -11,7 +11,7 @@ namespace Golf_v1_0
 {
     public enum GameState
     {
-        Menu, MultiplayerMenu, SinglePlayerMenu,ChoseVect,ChosePower,Rolling,Pause,GameOver, Exit,
+        Menu, MultiplayerMenu, SinglePlayerMenu,ChoseVect,ChosePower,Rolling,Pause,GameOver,Win, Exit,
         
     }
     public enum GameType
@@ -50,9 +50,13 @@ namespace Golf_v1_0
         private Player player;
         public static bool IsMusPlaying;
         Menu menu = new Menu();
+        Hole hole = new Hole(new Vector2(10,10));
+        ContentManager conten2t;
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
+
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
             Width = 1000;
@@ -74,7 +78,7 @@ namespace Golf_v1_0
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             ball.LoadContent(Content);
             gmenu.LoadContent(Content);
-            player = new Player((int)ball.position.X+ball.texture.Width, (int)ball.position.Y + ball.texture.Height,ball.texture.Width*3,ball.texture.Height*2);
+            player = new Player((int)ball.position.X + ball.boundingBox.Height/2, (int)ball.position.Y + ball.boundingBox.Height / 2, ball.texture.Width, ball.texture.Height); ;
             player.LoadContent(Content);
             hud.LoadContent(Content);
 
@@ -91,6 +95,7 @@ namespace Golf_v1_0
             MediaPlayer.Stop();
             IsMusPlaying = false;
         }
+        
         protected override void Update(GameTime gameTime)
         {
             //if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
@@ -146,6 +151,11 @@ namespace Golf_v1_0
                     break;
                 case GameState.ChosePower:
                     UpdateForcing(gameTime);
+                    if (keyboardState.IsKeyDown(Keys.Space) && keyboardState!= prevState)
+                    {
+                        Game1.gameState = GameState.Rolling;
+                        ball.SetSpeed(player.angle,player.force);
+                    }
                     if (keyboardState.IsKeyDown(Keys.Escape) && keyboardState != prevState)
                     {
 
@@ -154,7 +164,10 @@ namespace Golf_v1_0
 
                     }
                     break;
-                   
+                case GameState.Rolling:
+                    ball.Update();
+
+                    break;
                 case GameState.Exit:
                     this.Exit();
                     

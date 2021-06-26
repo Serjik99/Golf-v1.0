@@ -16,8 +16,9 @@ namespace Golf_v1_0
         static int x;
         static int y;
         int width;
-        Rectangle rect;
-        float angle = (float)Math.PI * 2;
+        public Rectangle rect;
+        public float angle = (float)Math.PI * 2;
+        public float force = 0;
         KeyboardState keyboardState;
         KeyboardState prevState;
         Vector2 direction;
@@ -45,13 +46,22 @@ namespace Golf_v1_0
                 angle += 0.01f;
         }
         double ticks = 0;
-        
+        double prevWidth = -1000;
         public void Update(GameTime gametime)
         {
-            
+           
             double c = (Math.Sin(ticks / 10)+1) *(width/2);
             rect.Width = width +(int)c;
+            if (rect.Width>prevWidth)
+            {
+                force++;
+            }
+            else if (rect.Width < prevWidth)
+            {
+                force++;
+            }
             ticks++;
+            prevWidth = rect.Width;
         }
     }
 }
