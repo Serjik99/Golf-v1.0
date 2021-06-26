@@ -23,8 +23,8 @@ namespace Golf_v1_0
         Texture2D singlePlTexture;
         Texture2D mpTExture;
         Texture2D PauseTexture;
-        Uri selectSound = new Uri(@"C:\Users\romah\OneDrive\Документы\GitHub\Golf-v1.0\Golf v1.0\Content\MenuContent\3a7ee48dc00822f.mp3");
-        Uri changeSound = new Uri(@"C:\Users\romah\OneDrive\Документы\GitHub\Golf-v1.0\Golf v1.0\Content\MenuContent\button-37a.mp3");
+        private Song changeSound;
+        private Song selectSound;
         int selected;
         public Global_Menu()
         {
@@ -39,7 +39,8 @@ namespace Golf_v1_0
             singlePlTexture = content.Load<Texture2D>(@"MenuContent\SinglePlayer");
             mpTExture = content.Load<Texture2D>(@"MenuContent\MultiPlayer");
             PauseTexture = content.Load<Texture2D>(@"MenuContent\Pause");
-            
+            changeSound = content.Load<Song>(@"MenuContent\button-37a");
+            selectSound = content.Load<Song>(@"MenuContent\3a7ee48dc00822f");
         }
         public void Update(GameTime gameTime,List<string> blist)
         {
@@ -50,7 +51,7 @@ namespace Golf_v1_0
                 if (selected < blist.Count - 1)
                 {
                     selected++;
-                    MediaPlayer.Play(Song.FromUri("",changeSound));
+                    MediaPlayer.Play(changeSound);
                 }
             }
 
@@ -59,7 +60,7 @@ namespace Golf_v1_0
                 if (selected > 0)
                 {
                     selected--;
-                    MediaPlayer.Play(Song.FromUri("", changeSound));
+                    MediaPlayer.Play(changeSound);
                 }
             }
             if (Game1.gameState == GameState.Menu)
@@ -71,20 +72,20 @@ namespace Golf_v1_0
                         case 0:             // Start Play
                             Game1.gameState = GameState.SinglePlayerMenu;
 
-                            MediaPlayer.Play(Song.FromUri( " ",selectSound));
+                            MediaPlayer.Play(selectSound);
                             break;
                         case 1:             // Info
                             Game1.gameState = GameState.MultiplayerMenu;
-                            MediaPlayer.Play(Song.FromUri(" ", selectSound));
+                            MediaPlayer.Play(selectSound);
                             break;
                         case 2:             // Exit
                             PlayMP3();
-                            MediaPlayer.Play(Song.FromUri(" ", selectSound));
+                            MediaPlayer.Play(selectSound);
                             break;
                            
                         case 3:
                             Game1.gameState = GameState.Exit;
-                            MediaPlayer.Play(Song.FromUri(Path.GetFileNameWithoutExtension(@"C:\Users\romah\OneDrive\Документы\GitHub\Golf-v1.0\Golf v1.0\Content\MenuContent\3a7ee48dc00822f.mp3"), new Uri(@"C:\Users\romah\OneDrive\Документы\GitHub\Golf-v1.0\Golf v1.0\Content\MenuContent\3a7ee48dc00822f.mp3")));
+                            MediaPlayer.Play(selectSound);
                             break;
                     }
                 }
@@ -99,15 +100,15 @@ namespace Golf_v1_0
                         case 0:
                             Game1.gameType = GameType.SinglePlayer;
                             Game1.gameState = GameState.ChoseVect;
-                            MediaPlayer.Play(Song.FromUri(" ", selectSound));
+                            MediaPlayer.Play(selectSound);
                             break;    
                         case 1:             
                             Game1.gameState = GameState.Menu;
-                            MediaPlayer.Play(Song.FromUri(" ", selectSound));
+                            MediaPlayer.Play(selectSound);
                             break;
                         case 2:
                             Game1.gameState = GameState.Exit;
-                            MediaPlayer.Play(Song.FromUri(" ", selectSound));
+                            MediaPlayer.Play(selectSound);
                             break;
                     }
                 }
@@ -123,15 +124,15 @@ namespace Golf_v1_0
                         case 0:
                             Game1.gameType = GameType.Multiplayer;// Info
                             Game1.gameState = GameState.ChoseVect;
-                            MediaPlayer.Play(Song.FromUri(" ", selectSound));
+                            MediaPlayer.Play(selectSound);
                             break;
                         case 1:
                             Game1.gameState = GameState.Menu;
-                            MediaPlayer.Play(Song.FromUri(" ", selectSound));
+                            MediaPlayer.Play(selectSound);
                             break;
                         case 2:
                             Game1.gameState = GameState.Exit;
-                            MediaPlayer.Play(Song.FromUri(" ", selectSound));
+                            MediaPlayer.Play(selectSound);
                             break;
                     }
                 }
@@ -147,23 +148,23 @@ namespace Golf_v1_0
                         case 0:
                             
                             Game1.gameState = Game1.prevGState;
-                            MediaPlayer.Play(Song.FromUri(" ", selectSound));
+                            MediaPlayer.Play(selectSound);
                             break;
                         case 1:
                             if (Game1.gameType == GameType.SinglePlayer)
                             {
                                 Game1.gameState = GameState.SinglePlayerMenu;
-                                MediaPlayer.Play(Song.FromUri(" ", selectSound));
+                                MediaPlayer.Play(selectSound);
                             }
                             else if (Game1.gameType == GameType.Multiplayer)
                             {
                                 Game1.gameState = GameState.MultiplayerMenu;
-                                MediaPlayer.Play(Song.FromUri(" ", selectSound));
+                                MediaPlayer.Play(selectSound);
                             }
                             break;
                         case 2:
                             Game1.gameState = GameState.Exit;
-                            MediaPlayer.Play(Song.FromUri(" ", selectSound));
+                            MediaPlayer.Play(selectSound);
                             break;
                       
                     }

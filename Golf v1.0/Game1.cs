@@ -51,7 +51,7 @@ namespace Golf_v1_0
         public static bool IsMusPlaying;
         Menu menu = new Menu();
         Hole hole = new Hole(new Vector2(10,10));
-        ContentManager conten2t;
+
 
         public Game1()
         {
@@ -165,7 +165,7 @@ namespace Golf_v1_0
                     }
                     break;
                 case GameState.Rolling:
-                    ball.Update();
+                    ball.Update(Content,hole);
 
                     break;
                 case GameState.Exit:
