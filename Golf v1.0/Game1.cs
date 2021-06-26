@@ -29,29 +29,36 @@ namespace Golf_v1_0
         private List<string> multiPlList = new List<string>() {
                 "Connect","Back","Exit"
             };
-        private List<string> pause = new List<string>()
+        private List<string> Gpause = new List<string>()
         {
-            "Continue","Exit"
+            "Continue","Back","Exit"
         };
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         private Hud hud = new Hud();
         public static string  path;
         GraphicsDeviceManager graphics;
+        KeyboardState keyboardState;
+        KeyboardState prevState;
         Ball ball = new Ball(new Vector2(250, 800));
         public static GameState gameState = GameState.Menu;
         public static GameState prevGState = GameState.Menu;
         public static GameType gameType = GameType.None;
+        public static int Width;
+        public static int Height;
         public Global_Menu gmenu = new Global_Menu();
         private Player player;
         public static bool IsMusPlaying;
+        Menu menu = new Menu();
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
-            graphics.PreferredBackBufferHeight = 1000;
-            graphics.PreferredBackBufferWidth = 500;
+            Width = 1000;
+            Height = 1000;
+            graphics.PreferredBackBufferHeight = Height;
+            graphics.PreferredBackBufferWidth = Width;
         }
 
         protected override void Initialize()
@@ -87,9 +94,8 @@ namespace Golf_v1_0
         protected override void Update(GameTime gameTime)
         {
             //if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-              //  Exit();
-            KeyboardState keyboardState = Keyboard.GetState();
-            KeyboardState prevState = Keyboard.GetState();
+            //  Exit();
+            keyboardState = Keyboard.GetState();
             if (keyboardState.IsKeyDown(Keys.RightAlt)&&IsMusPlaying==true)
             {
                 
@@ -109,9 +115,11 @@ namespace Golf_v1_0
                     break;
                 case GameState.SinglePlayerMenu:
                     UpdateMenu(gameTime,singlePlList);
+                    
                     break;
                 case GameState.MultiplayerMenu:
                     UpdateMenu(gameTime,multiPlList);
+                  
                     break;
                 case GameState.ChoseVect:
                     UpdateAngArrow(gameTime);
@@ -119,39 +127,31 @@ namespace Golf_v1_0
                     {
                         Game1.gameState = GameState.ChosePower;
                     }
-                    if (keyboardState.IsKeyDown(Keys.Escape))
+                    if (keyboardState.IsKeyDown(Keys.Escape) && keyboardState != prevState)
                     {
-                        prevState = keyboardState;
-                        if (keyboardState.IsKeyUp(Keys.Escape)&&keyboardState!=prevState)
-                        {
-                            Game1.gameState = GameState.Pause;
-                            Game1.prevGState = GameState.ChoseVect;
-                        }
-                    
+
+                        Game1.gameState = GameState.Pause;
+                        Game1.prevGState = GameState.ChoseVect;
+                        
                     }
                     break;
                 case GameState.Pause:
-                    UpdateMenu(gameTime,pause);
-                    if (keyboardState.IsKeyDown(Keys.Escape))
-                    {
-                       
-                        if (keyboardState.IsKeyUp(Keys.Escape))
-                        {
-                            Game1.gameState = prevGState;
-                        }
-                    }
                     
+                    if (keyboardState.IsKeyDown(Keys.Escape) && keyboardState != prevState)
+                    {
+
+                        Game1.gameState = prevGState;
+                    }
+                    UpdateMenu(gameTime, multiPlList);
                     break;
                 case GameState.ChosePower:
                     UpdateForcing(gameTime);
-                    if (keyboardState.IsKeyDown(Keys.Escape))
+                    if (keyboardState.IsKeyDown(Keys.Escape) && keyboardState != prevState)
                     {
-                        if (keyboardState.IsKeyUp(Keys.Escape))
-                        {
-                            Game1.gameState = GameState.Pause;
-                            Game1.prevGState = GameState.ChosePower;
-                        }
-                       
+
+                        Game1.gameState = GameState.Pause;
+                        Game1.prevGState = GameState.ChoseVect;
+
                     }
                     break;
                    
@@ -206,6 +206,9 @@ namespace Golf_v1_0
                     case GameState.ChosePower:
                         DrawAngling(_spriteBatch);
                         DrawHud(_spriteBatch);
+                        break;
+                    case GameState.Pause:
+                        DrawGlobalMenu(_spriteBatch, Gpause);
                         break;
                     case GameState.GameOver:
                         

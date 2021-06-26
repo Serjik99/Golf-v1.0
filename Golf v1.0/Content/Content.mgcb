@@ -44,6 +44,12 @@
 /processorParam:TextureFormat=Compressed
 /build:GameFont.spritefont
 
+#begin MenuContent/3a7ee48dc00822f.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:MenuContent/3a7ee48dc00822f.mp3
+
 #begin MenuContent/Button.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -103,6 +109,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:MenuContent/MultiPlayer.png
+
+#begin MenuContent/Pause.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:MenuContent/Pause.png
 
 #begin MenuContent/SinglePlayer.png
 /importer:TextureImporter
