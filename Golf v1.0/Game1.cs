@@ -101,13 +101,13 @@ namespace Golf_v1_0
             //if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
             //  Exit();
             keyboardState = Keyboard.GetState();
-            if (keyboardState.IsKeyDown(Keys.RightAlt)&&IsMusPlaying==true)
+            if (keyboardState.IsKeyDown(Keys.RightAlt)&&IsMusPlaying==true&&keyboardState!=prevState)
             {
                 
                 PauseMus();
 
             }
-            else if (keyboardState.IsKeyDown(Keys.RightShift) && IsMusPlaying ==false)
+            else if (keyboardState.IsKeyDown(Keys.RightAlt) && IsMusPlaying ==false && keyboardState != prevState)
             {
                 PlayMus(path);
             }
@@ -154,7 +154,7 @@ namespace Golf_v1_0
                     if (keyboardState.IsKeyDown(Keys.Space) && keyboardState!= prevState)
                     {
                         Game1.gameState = GameState.Rolling;
-                        ball.SetSpeed(player.angle,player.force);
+                        ball.SetSpeed((float)(player.angle/Math.PI/2),player.force);
                     }
                     if (keyboardState.IsKeyDown(Keys.Escape) && keyboardState != prevState)
                     {
