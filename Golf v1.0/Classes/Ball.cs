@@ -14,6 +14,8 @@ namespace Golf_v1_0
         Vector2 speed;
         double acceleration = 0.1;
         public Vector2 position;
+        int y;
+        int x;
         
         public Texture2D texture;
 
@@ -30,8 +32,10 @@ namespace Golf_v1_0
             get { return boundingBox; }
         }
 
-        public Ball(Vector2 position)
+        public Ball(Vector2 position , int x , int y)
         {
+            this.y = y;
+            this.x = x;
             this.position = position;
         }
 
@@ -54,7 +58,7 @@ namespace Golf_v1_0
         }
         public void Update(ContentManager content , Hole hole)
         {
-            if ((position + speed).X <= 500 - boundingBox.Width && (position + speed).Y <= 1000 - boundingBox.Height && (position + speed).X >= 0 && (position + speed).Y >= 0)
+            if ((position + speed).X <= x - boundingBox.Width && (position + speed).Y <= y - boundingBox.Height && (position + speed).X >= 0 && (position + speed).Y >= 0)
             {
                 position += speed;
                 boundingBox.X = (int)position.X;
@@ -80,11 +84,11 @@ namespace Golf_v1_0
                 }
                 textureNumber++;
             }
-            if ((position + speed).X > 500 - boundingBox.Width || (position + speed).X < 0)
+            if ((position + speed).X > x - boundingBox.Width || (position + speed).X < 0)
             {
                 speed.X = -speed.X;
             }
-            if ((position + speed).Y > 1000 - boundingBox.Height || (position + speed).Y < 0)
+            if ((position + speed).Y > y - boundingBox.Height || (position + speed).Y < 0)
             {
                 speed.Y = -speed.Y;
             }
@@ -119,7 +123,7 @@ namespace Golf_v1_0
                     Game1.gameState = GameState.Win;
                     texture = content.Load<Texture2D>("golfBall(0)");
                     hole.SetTexture(content, "hole_with_ball");
-                    speed = new Vector2(0, 0);
+                     speed = new Vector2(0, 0);
                 }
             }
 
