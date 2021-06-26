@@ -85,7 +85,7 @@ namespace Golf_v1_0
                 spriteBatch.DrawString
                 (
                     spriteFont, buttonList[i],
-                    new Vector2(100, 20 * i), color
+                    new Vector2(100, 50 * i), color
                 );
             }
 
