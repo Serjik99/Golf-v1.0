@@ -83,7 +83,7 @@ namespace Golf_v1_0
                         case 2:             // Exit
                             
                             MediaPlayer.Play(selectSound);
-                            PlayMP3();
+                            SetMP3();
                             break;
                            
                         case 3:
@@ -159,13 +159,15 @@ namespace Golf_v1_0
                         case 1:
                             if (Game1.gameType == GameType.SinglePlayer)
                             {
-                                Game1.gameState = GameState.SinglePlayerMenu;
                                 MediaPlayer.Play(selectSound);
+                                Game1.gameState = GameState.SinglePlayerMenu;
+                                
                             }
                             else if (Game1.gameType == GameType.Multiplayer)
                             {
-                                Game1.gameState = GameState.MultiplayerMenu;
                                 MediaPlayer.Play(selectSound);
+                                Game1.gameState = GameState.MultiplayerMenu;
+
                             }
                             break;
                         case 2:
@@ -227,7 +229,7 @@ namespace Golf_v1_0
 
             }
         }
-        private void PlayMP3()
+        private void SetMP3()
         {
             
             var filePath = string.Empty;
@@ -246,7 +248,7 @@ namespace Golf_v1_0
 
 
                     Game1.path = filePath;
-                    Game1.PlayMus(filePath);
+                   
 
                 }
             }

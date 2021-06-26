@@ -23,11 +23,11 @@ namespace Golf_v1_0
         KeyboardState prevState;
         Vector2 direction;
         Vector2 position;
-        Texture2D texture;
+        public Texture2D texture;
         
         public Player()
         {
-            
+            force = 2;
         }
         public void LoadContent(ContentManager content)
         {
@@ -56,13 +56,30 @@ namespace Golf_v1_0
            
             double c = (Math.Sin(ticks / 10)+1) *(width/2);
             rect.Width = width +(int)c;
+            
             if (rect.Width>prevWidth)
             {
-                force+=2;
+                if (force >= 30)
+                {
+                    force =30;
+                }
+                else
+                {
+                    force += 2;
+
+                }
+                
             }
             else if (rect.Width < prevWidth)
             {
-                force-=2;
+                if (force < 0)
+                {
+                    force = 1;
+                }
+                else
+                {
+                    force -= 2;
+                }
             }
             ticks++;
             prevWidth = rect.Width;
