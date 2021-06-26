@@ -8,7 +8,7 @@ namespace Golf_v1_0
 {
     class BackGround
     {
-        public Texture2D texture;
+        Texture2D texture;
         int x;
         int y;
 
@@ -32,6 +32,10 @@ namespace Golf_v1_0
                 }
             }
             
+        }
+        public void Update()
+        {
+
         }
     }
 }
