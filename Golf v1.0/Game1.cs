@@ -18,8 +18,21 @@ namespace Golf_v1_0
     {
         None,Multiplayer, SinglePlayer
     }
+    public enum Turn
+    {
+        Player1, Player2
+    }
     public class Game1 : Game
     {
+        public int Score1()
+        {
+            return score1;
+        }
+        public int Score2()
+        {
+            return score2;
+        }
+
         private List<string> gmenuList = new List<string>() {
                 "SinglePlayer","Multiplayer","CustomizeMusic","Exit"
             };
@@ -46,12 +59,17 @@ namespace Golf_v1_0
         public static GameType gameType = GameType.None;
         public static int Width;
         public static int Height;
+        public static Turn turn = Turn.Player1;
+        public bool IsWin = false;
         public Global_Menu gmenu = new Global_Menu();
         private Player player;
         public static bool IsMusPlaying;
-        private BackGround back;
+        public int score1 = 0;
+        public int score2 = 0;
+        BackGround back;
         Menu menu = new Menu();
         Hole hole;
+        
         public string whoWin;
 
 
@@ -67,6 +85,7 @@ namespace Golf_v1_0
             graphics.PreferredBackBufferWidth = Width;
             ball = new Ball(new Vector2(250, 800), Width , Height );
             hole = new Hole(Width, Height);
+            back = new BackGround(Width, Height);
         }
 
         protected override void Initialize()
@@ -86,13 +105,14 @@ namespace Golf_v1_0
             player.LoadContent(Content);
             hud.LoadContent(Content);
             hole.LoadContent(Content);
+            back.LoadContent(Content);
 
             
                 // TODO: use this.Content to load your game content here
     }
         public static void PlayMus(string path)
         {
-           MediaPlayer.Play(Song.FromUri(Path.GetFileNameWithoutExtension(path), new Uri(path)));
+           //MediaPlayer.Play(Song.FromUri(Path.GetFileNameWithoutExtension(path), new Uri(path)));
             IsMusPlaying = true;
         }
         public static void PauseMus()
@@ -103,8 +123,8 @@ namespace Golf_v1_0
         
         protected override void Update(GameTime gameTime)
         {
-            //if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-            //  Exit();
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+                Exit();
             keyboardState = Keyboard.GetState();
             if (keyboardState.IsKeyDown(Keys.RightAlt)&&IsMusPlaying==true&&keyboardState!=prevState)
             {
