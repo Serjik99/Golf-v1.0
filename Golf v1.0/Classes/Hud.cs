@@ -21,7 +21,7 @@ namespace Golf_v1_0
         }
         public void Update(GameTime gameTime)
         {
-            score = 1000000;
+            
    
         }
         public void LoadContent(ContentManager content)

@@ -33,6 +33,10 @@ namespace Golf_v1_0
         {
             "Continue","Back","Exit"
         };
+        private List<string> GEnd = new List<string>()
+        {
+            "MainMenu","Continue","Exit"
+        };
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         private Hud hud = new Hud();
@@ -90,9 +94,8 @@ namespace Golf_v1_0
     }
         public static void PlayMus(string path)
         {
-            MediaPlayer.Pause();
+           MediaPlayer.Play(Song.FromUri(Path.GetFileNameWithoutExtension(path), new Uri(path)));
             IsMusPlaying = true;
-            MediaPlayer.Play(Song.FromUri(Path.GetFileNameWithoutExtension(path), new Uri(path)));
         }
         public static void PauseMus()
         {
@@ -120,19 +123,20 @@ namespace Golf_v1_0
             {
                 
                 case GameState.Menu:
-                    UpdateMenu(gameTime,gmenuList);
+
+                    gmenu.Update(gameTime,gmenuList);
                     break;
                 case GameState.SinglePlayerMenu:
-                    UpdateMenu(gameTime,singlePlList);
+                    gmenu.Update(gameTime,singlePlList);
                     
                     break;
                 case GameState.MultiplayerMenu:
-                    UpdateMenu(gameTime,multiPlList);
+                    gmenu.Update(gameTime,multiPlList);
                   
                     break;
                 case GameState.ChoseVect:
-                   
-                    UpdateAngArrow(gameTime);
+                    hud.Update(gameTime);
+                    player.UpdateAngle(gameTime);
                     if (keyboardState.IsKeyDown(Keys.Space))
                     {
                         Game1.gameState = GameState.ChosePower;
@@ -146,17 +150,16 @@ namespace Golf_v1_0
                     }
                     break;
                 case GameState.Pause:
-                  
                     if (keyboardState.IsKeyDown(Keys.Escape) && keyboardState != prevState)
                     {
 
                         Game1.gameState = prevGState;
                     }
-                    UpdateMenu(gameTime, multiPlList);
+                    gmenu.Update(gameTime, multiPlList);
                     break;
                 case GameState.ChosePower:
-                    
-                    UpdateForcing(gameTime);
+                    hud.Update(gameTime);
+                    player.Update(gameTime);
                     if (keyboardState.IsKeyDown(Keys.Space) && keyboardState!= prevState)
                     {
                         Game1.gameState = GameState.Rolling;
@@ -171,10 +174,16 @@ namespace Golf_v1_0
                     }
                     break;
                 case GameState.Rolling:
-                  
+                    hud.Update(gameTime);
                     player.rect.Width = player.texture.Width/ 2;
                     ball.Update(Content,hole);
                     player.rect.Width = player.texture.Width;
+                    break;
+                case GameState.GameOver:
+                    gmenu.Update(gameTime, GEnd);
+                    break;
+                case GameState.Win:
+                    gmenu.Update(gameTime, GEnd);
                     break;
                 case GameState.Exit:
                     this.Exit();
@@ -186,22 +195,10 @@ namespace Golf_v1_0
             base.Update(gameTime);
         }
 
-        private void UpdateAngArrow(GameTime gameTime)
-        {
-            player.UpdateAngle(gameTime);
-        }
-        private void UpdateForcing(GameTime gameTime)
-        {
-            player.Update(gameTime);
-        }
-        private void UpdateMenu(GameTime gameTime,List<string> blist)
-        {
-            gmenu.Update(gameTime,blist);
-        }
-        private void UpdateHUD(GameTime gameTime)
-        {
-            hud.Update(gameTime);
-        }
+       
+       
+      
+        
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.ForestGreen);
@@ -212,37 +209,40 @@ namespace Golf_v1_0
                 switch (gameState)
                 {
                     case GameState.Menu:
-                        DrawGlobalMenu(_spriteBatch,gmenuList);
+                        gmenu.Draw(_spriteBatch,gmenuList);
                         break;
                     case GameState.SinglePlayerMenu:
-                        DrawGlobalMenu(_spriteBatch, singlePlList);
+                        gmenu.Draw(_spriteBatch, singlePlList);
                         break;
                     case GameState.MultiplayerMenu:
-                        DrawGlobalMenu(_spriteBatch, multiPlList);
+                        gmenu.Draw(_spriteBatch, multiPlList);
                         break;
                     case GameState.ChoseVect:
-                        DrawBack(_spriteBatch);
+                        back.Draw(_spriteBatch);
                         player.SetPosition((int)ball.position.X + ball.boundingBox.Height / 2, (int)ball.position.Y + ball.boundingBox.Height / 2, 100, 50);
-                        DrawAngling(_spriteBatch);
-                        DrawHud(_spriteBatch);
+                        player.DrawAngle(_spriteBatch);
+                        hud.Draw(_spriteBatch);
                         break;
                     case GameState.ChosePower:
 
-                        DrawBack(_spriteBatch);
+                        back.Draw(_spriteBatch);
 
-                        DrawAngling(_spriteBatch);
-                        DrawHud(_spriteBatch);
+                        player.DrawAngle(_spriteBatch);
+                        hud.Draw(_spriteBatch);
                         break;
                     case GameState.Pause:
-                        DrawBack(_spriteBatch);
-                        DrawGlobalMenu(_spriteBatch, Gpause);
+                        back.Draw(_spriteBatch);
+                        gmenu.Draw(_spriteBatch, Gpause);
                         
                         break;
                     case GameState.Rolling:
-                        DrawBack(_spriteBatch);
+                        back.Draw(_spriteBatch);
                         break;
                     case GameState.GameOver:
-                        
+                        gmenu.Draw(_spriteBatch, GEnd);
+                        break;
+                    case GameState.Win:
+                        gmenu.Draw(_spriteBatch, GEnd);
                         break;
                 }
             }
@@ -252,23 +252,9 @@ namespace Golf_v1_0
 
             base.Draw(gameTime);
         }
-        private void DrawGlobalMenu(SpriteBatch spriteBatch,List<string> blist)
-        {
-            
-            gmenu.Draw(spriteBatch,blist);
-        }
-        private void DrawAngling(SpriteBatch spriteBatch)
-        {
-
-            player.DrawAngle(spriteBatch);
-        }
-        private void DrawHud(SpriteBatch spriteBatch)
-        {
-            hud.Draw(spriteBatch);
-        }
-        private void DrawBack(SpriteBatch spriteBatch)
-        {
-            back.Draw(spriteBatch);
-        }
+      
+     
+        
+        
     }
 }
