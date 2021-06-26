@@ -8,16 +8,18 @@ using System;
 
 namespace Golf_v1_0
 {
+    
     class Hole
     {
+        Random random = new Random();
         Texture2D texture;
         Vector2 position;
         Rectangle holeRectangle;
         Rectangle colision;
 
-        public Hole(Vector2 position)
+        public Hole(int x , int y)
         {
-            this.position = position;
+            position = new Vector2(random.Next(0, x - 100), random.Next(0 , y /3));
 
         }
 

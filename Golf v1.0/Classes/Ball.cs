@@ -70,13 +70,13 @@ namespace Golf_v1_0
 
 
 
-                if (speed.X != 0 && speed.Y != 0)
+                if (speed.X != 0 || speed.Y != 0)
                 {
-                    if (textureNumber == 30)
+                    if (textureNumber == 10)
                     {
                         texture = content.Load<Texture2D>("Ball(0)");
                     }
-                    if (textureNumber == 60)
+                    if (textureNumber >= 20)
                     {
                         texture = content.Load<Texture2D>("balltexture(0)");
                         textureNumber = 0;

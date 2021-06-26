@@ -50,7 +50,8 @@ namespace Golf_v1_0
         private Player player;
         public static bool IsMusPlaying;
         Menu menu = new Menu();
-        Hole hole = new Hole(new Vector2(10,10));
+        Hole hole;
+        public string whoWin;
 
 
         public Game1()
@@ -64,6 +65,7 @@ namespace Golf_v1_0
             graphics.PreferredBackBufferHeight = Height;
             graphics.PreferredBackBufferWidth = Width;
             ball = new Ball(new Vector2(250, 800), Width , Height );
+            hole = new Hole(Width, Height);
         }
 
         protected override void Initialize()
@@ -82,6 +84,7 @@ namespace Golf_v1_0
             player = new Player() ;
             player.LoadContent(Content);
             hud.LoadContent(Content);
+            hole.LoadContent(Content);
 
             
                 // TODO: use this.Content to load your game content here
@@ -171,7 +174,8 @@ namespace Golf_v1_0
                     break;
                 case GameState.Exit:
                     this.Exit();
-                    
+                    break;
+                case GameState.Win:
                     break;
 
             }
@@ -217,11 +221,13 @@ namespace Golf_v1_0
                         player.SetPosition((int)ball.position.X + ball.boundingBox.Height / 2, (int)ball.position.Y + ball.boundingBox.Height / 2, 100, 50);
                         DrawAngling(_spriteBatch);
                         DrawHud(_spriteBatch);
+                    
                         break;
                     case GameState.ChosePower:
                         
                         DrawAngling(_spriteBatch);
                         DrawHud(_spriteBatch);
+                        hole.Draw(_spriteBatch);
                         break;
                     case GameState.Pause:
                         DrawGlobalMenu(_spriteBatch, Gpause);
@@ -231,7 +237,7 @@ namespace Golf_v1_0
                         break;
                 }
             }
-            
+            hole.Draw(_spriteBatch);
             ball.Draw(_spriteBatch);
             _spriteBatch.End();
 
