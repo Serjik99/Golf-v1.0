@@ -126,8 +126,8 @@ namespace Golf_v1_0
         }
         public void SetSpeed(float angle, double force)
         {
-            speed.X = (float)(Math.Sin(angle) * force);
-            speed.Y = (float)(Math.Cos(angle) * force);
+            speed.X = (float)(Math.Sin(angle+ Math.PI/2) * force);
+            speed.Y = (float)(Math.Cos(angle + Math.PI / 2) * force);
         }
 
     }
