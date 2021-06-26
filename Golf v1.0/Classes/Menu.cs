@@ -56,7 +56,7 @@ namespace Golf_v1_0
                         //Game1.gameState = GameState.Playing;
                         break;
                     case 1:             // Info
-                       // Game1.gameState = GameState.Info;
+                       //Game1.gameState = GameState.Info;
                         break;
                     case 2:             // Exit
                         //Game1.gameState = GameState.Exit;
