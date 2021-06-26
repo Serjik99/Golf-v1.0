@@ -98,11 +98,11 @@ namespace Golf_v1_0
                 Exit();
             KeyboardState keyboardState = Keyboard.GetState();
             KeyboardState prevState = Keyboard.GetState();
-            if (keyboardState.IsKeyDown(Keys.RightAlt) && IsMusPlaying == true)
+            /*if (keyboardState.IsKeyDown(Keys.RightAlt) && IsMusPlaying == true)
             {
                 PauseMus();
 
-                switch (gameState)
+                /*switch (gameState)
                 {
                     case GameState.Menu:
                         UpdateMenu(gameTime, gmenuList);
@@ -122,14 +122,15 @@ namespace Golf_v1_0
                         this.Exit();
                         break;
                     case GameState.Rolling:
-                        ball.Update(Content, lunk);
+                        
                         break;
 
                 }
-
+                
+            }*/
+                ball.Update(Content, lunk);
                 base.Update(gameTime);
-            }
-        }
+    }
             private void UpdateAngArrow(GameTime gameTime)
             {
                 player.UpdateAngle(gameTime);
@@ -153,7 +154,7 @@ namespace Golf_v1_0
             _spriteBatch.Begin();
             {
 
-                switch (gameState)
+                /*switch (gameState)
                 {
                     case GameState.Menu:
                         DrawGlobalMenu(_spriteBatch, gmenuList);
@@ -175,7 +176,7 @@ namespace Golf_v1_0
                     case GameState.GameOver:
 
                         break;
-                }
+                }*/
             }
             backGround.Draw(_spriteBatch);
             ball.Draw(_spriteBatch);

@@ -53,7 +53,7 @@ namespace Golf_v1_0
         {
             spriteBatch.Draw(texture, boundingBox, Color.White);
 
-            spriteBatch.Draw(texture, colision, Color.Red);
+            //spriteBatch.Draw(texture, colision, Color.Red);
 
         }
         public void Update(ContentManager content , Hole hole)
@@ -123,7 +123,7 @@ namespace Golf_v1_0
                     Game1.gameState = GameState.Win;
                     texture = content.Load<Texture2D>("golfBall(0)");
                     hole.SetTexture(content, "hole_with_ball");
-                     speed = new Vector2(0, 0);
+                    speed = new Vector2(0, 0);
                 }
             }
 
