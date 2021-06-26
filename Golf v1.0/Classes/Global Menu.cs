@@ -50,8 +50,9 @@ namespace Golf_v1_0
             {
                 if (selected < blist.Count - 1)
                 {
-                    selected++;
                     MediaPlayer.Play(changeSound);
+                    selected++;
+                    
                 }
             }
 
@@ -59,8 +60,9 @@ namespace Golf_v1_0
             {
                 if (selected > 0)
                 {
-                    selected--;
                     MediaPlayer.Play(changeSound);
+                    selected--;
+                    
                 }
             }
             if (Game1.gameState == GameState.Menu)
@@ -79,13 +81,15 @@ namespace Golf_v1_0
                             MediaPlayer.Play(selectSound);
                             break;
                         case 2:             // Exit
-                            PlayMP3();
+                            
                             MediaPlayer.Play(selectSound);
+                            PlayMP3();
                             break;
                            
                         case 3:
+
                             Game1.gameState = GameState.Exit;
-                            MediaPlayer.Play(selectSound);
+                            
                             break;
                     }
                 }
@@ -107,8 +111,9 @@ namespace Golf_v1_0
                             MediaPlayer.Play(selectSound);
                             break;
                         case 2:
-                            Game1.gameState = GameState.Exit;
                             MediaPlayer.Play(selectSound);
+                            Game1.gameState = GameState.Exit;
+                            
                             break;
                     }
                 }
@@ -131,8 +136,9 @@ namespace Golf_v1_0
                             MediaPlayer.Play(selectSound);
                             break;
                         case 2:
-                            Game1.gameState = GameState.Exit;
                             MediaPlayer.Play(selectSound);
+                            Game1.gameState = GameState.Exit;
+                            
                             break;
                     }
                 }
@@ -163,8 +169,9 @@ namespace Golf_v1_0
                             }
                             break;
                         case 2:
-                            Game1.gameState = GameState.Exit;
                             MediaPlayer.Play(selectSound);
+                            Game1.gameState = GameState.Exit;
+                            
                             break;
                       
                     }
