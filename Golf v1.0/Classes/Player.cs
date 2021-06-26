@@ -46,7 +46,7 @@ namespace Golf_v1_0
         }
         double ticks = 0;
         double prevWidth = -1000;
-        public void SetPosition(int x, int y, int w, int h)
+        public void SetPosition(int x,int y,int w,int h)
         {
             rect = new Rectangle(x,y, w, h);
             width = rect.Width;
@@ -58,11 +58,11 @@ namespace Golf_v1_0
             rect.Width = width +(int)c;
             if (rect.Width>prevWidth)
             {
-                force++;
+                force+=2;
             }
             else if (rect.Width < prevWidth)
             {
-                force++;
+                force-=2;
             }
             ticks++;
             prevWidth = rect.Width;
