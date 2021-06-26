@@ -79,7 +79,7 @@ namespace Golf_v1_0
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             ball.LoadContent(Content);
             gmenu.LoadContent(Content);
-            player = new Player((int)ball.position.X + ball.boundingBox.Height/2, (int)ball.position.Y + ball.boundingBox.Height / 2, ball.texture.Width, ball.texture.Height); ;
+            player = new Player() ;
             player.LoadContent(Content);
             hud.LoadContent(Content);
 
@@ -214,10 +214,12 @@ namespace Golf_v1_0
                         DrawGlobalMenu(_spriteBatch, multiPlList);
                         break;
                     case GameState.ChoseVect:
+                        player.SetPosition((int)ball.position.X + ball.boundingBox.Height / 2, (int)ball.position.Y + ball.boundingBox.Height / 2, 100, 50);
                         DrawAngling(_spriteBatch);
                         DrawHud(_spriteBatch);
                         break;
                     case GameState.ChosePower:
+                        
                         DrawAngling(_spriteBatch);
                         DrawHud(_spriteBatch);
                         break;

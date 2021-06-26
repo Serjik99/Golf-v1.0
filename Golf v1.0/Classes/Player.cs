@@ -25,10 +25,9 @@ namespace Golf_v1_0
         Vector2 position;
         Texture2D texture;
         
-        public Player(int x,int y,int w,int h)
+        public Player()
         {
-            rect = new Rectangle(x,y, w, h);
-            width = rect.Width;
+            
         }
         public void LoadContent(ContentManager content)
         {
@@ -47,6 +46,11 @@ namespace Golf_v1_0
         }
         double ticks = 0;
         double prevWidth = -1000;
+        public void SetPosition(int x, int y, int w, int h)
+        {
+            rect = new Rectangle(x,y, w, h);
+            width = rect.Width;
+        }
         public void Update(GameTime gametime)
         {
            
