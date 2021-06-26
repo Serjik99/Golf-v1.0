@@ -126,7 +126,11 @@ namespace Golf_v1_0
                     speed = new Vector2(0, 0);
                 }
             }
-
+            if(Game1.gameState == GameState.Rolling && speed.X == 0 && speed.Y == 0)
+            {
+                Game1.gameState = GameState.ChoseVect;
+            }
+                
         }
         public void SetSpeed(float angle, double force)
         {
