@@ -54,7 +54,7 @@ namespace Golf_v1_0
         {
             spriteBatch.Draw(texture, boundingBox, Color.White);
 
-            spriteBatch.Draw(texture, colision, Color.Red);
+            //spriteBatch.Draw(texture, colision, Color.Red);
 
         }
         public void Update(ContentManager content , Hole hole)

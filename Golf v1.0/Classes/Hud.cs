@@ -40,7 +40,7 @@ namespace Golf_v1_0
         {
             Color color =  Color.Aqua;
             // Score
-        
+            
             spriteBatch.DrawString
                 (
                     spriteFont, "Score:"+score.ToString()+Game1.turn,

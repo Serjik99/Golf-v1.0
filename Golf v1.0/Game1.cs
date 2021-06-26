@@ -172,6 +172,7 @@ namespace Golf_v1_0
                         Game1.prevGState = GameState.ChoseVect;
                         
                     }
+                    hud.Update(gameTime);
                     break;
                 case GameState.Pause:
                     PauseMus();
@@ -183,6 +184,7 @@ namespace Golf_v1_0
                     UpdateMenu(gameTime, multiPlList);
                     break;
                 case GameState.ChosePower:
+                    hud.Update(gameTime);
                     PlayMus(path);
                     UpdateForcing(gameTime);
                     if (keyboardState.IsKeyDown(Keys.Space) && keyboardState!= prevState)
@@ -199,6 +201,7 @@ namespace Golf_v1_0
                     }
                     break;
                 case GameState.Rolling:
+                    hud.Update(gameTime);
                     PlayMus(path);
                     player.rect.Width = player.texture.Width/ 2;
                     ball.Update(Content,hole);
@@ -208,6 +211,7 @@ namespace Golf_v1_0
                     this.Exit();
                     break;
                 case GameState.Win:
+                    hud.Update(gameTime);
                     //вывести вигравшего по очкам плеера
                     break;
 
