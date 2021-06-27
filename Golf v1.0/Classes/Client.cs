@@ -8,7 +8,7 @@ using System.Threading;
 
 namespace GolfClient
 {
-    class Program
+   /* class Program
     {
         private static string host = "127.0.0.1";
         private static int port = 7000;
@@ -68,5 +68,5 @@ namespace GolfClient
             stream.Write(buffer, 0, buffer.Length);
 
         }
-    }
+    }*/
 }

@@ -52,7 +52,7 @@ namespace Golf_v1_0
                 }
                 if (sprite == 8)
                 {
-                    Game1.animation = Animation.None;
+                    Game1.animation = Animation.Mario;
                     iter = 0;
                     sprite = 0;
                 }

@@ -129,6 +129,7 @@ namespace Golf_v1_0
                         {
                             Game1.gameState = GameState.Win;
                         }
+                        Game1.animation = Animation.Mario;
                         Game1.turn = Turn.Player2;
                         position = new Vector2(250, 800);
                         boundingBox.X = (int)position.X;
@@ -144,6 +145,7 @@ namespace Golf_v1_0
                         {
                             Game1.gameState = GameState.Win;
                         }
+                        
                         Game1.turn = Turn.Player1;
                         position = new Vector2(250, 800);
                         boundingBox.X = (int)position.X;

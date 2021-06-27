@@ -305,8 +305,9 @@ namespace Golf_v1_0
                         {
                             hole.SetTexture(Content, "hole(0)");
                             player.SetPosition((int)ball.position.X + ball.boundingBox.Height / 2, (int)ball.position.Y + ball.boundingBox.Height / 2, 100, 50);
-                            DrawAngling(_spriteBatch);
+                            
                             hole.Draw(_spriteBatch);
+                            DrawAngling(_spriteBatch);
                             ball.Draw(_spriteBatch);
 
                         }
@@ -321,9 +322,9 @@ namespace Golf_v1_0
                      
                         ball.Draw(_spriteBatch);
                         DrawHud(_spriteBatch);
-                        hole.Draw(_spriteBatch);
+                        //hole.Draw(_spriteBatch);
 
-                        player.DrawAngle(_spriteBatch);
+                        //player.DrawAngle(_spriteBatch);
                         hud.Draw(_spriteBatch);
                         break;
                     
