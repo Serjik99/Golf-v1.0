@@ -287,17 +287,18 @@ namespace Golf_v1_0
                         DrawGlobalMenu(_spriteBatch,gmenuList);
                         break;
                     case GameState.SinglePlayerMenu:
+                        DrawBack(_spriteBatch);
                         gmenu.Draw(_spriteBatch, singlePlList);
                         break;
                     case GameState.MultiplayerMenu:
+                        DrawBack(_spriteBatch);
                         gmenu.Draw(_spriteBatch, multiPlList);
                         break;
                     case GameState.ChoseVect:
                         DrawBack(_spriteBatch);
                         if(animation == Animation.Mario || animation == Animation.Dino)
                         {
-                            ball.Draw(_spriteBatch);
-                            hole.Draw(_spriteBatch);
+                            
                             animator.Draw(_spriteBatch);
                         }
                         else if(animation == Animation.lunk)

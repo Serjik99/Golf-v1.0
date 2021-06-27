@@ -8,6 +8,7 @@ namespace Golf_v1_0
 {
     class Hud
     {
+
         private SpriteFont spriteFont;
         private int score;
         private Vector2 position;

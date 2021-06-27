@@ -19,6 +19,7 @@ namespace Golf_v1_0
         int y;
         int x;
         int score;
+        int num = 1;
         
         public Texture2D texture;
 
@@ -130,12 +131,12 @@ namespace Golf_v1_0
             }
             for (int i = 0; i < 2; i++)
             {
-                if (colision.Intersects(hole.GetColision()) )
+                if (colision.Intersects(hole.GetColision()) && speed.X <= 10 && speed.Y <= 10)
                 {
 
                     if(Game1.turn == Turn.Player1)
                     {
-                        Game1.score1 += score + 500;
+                        Game1.score1 += score + 200/ num;
                         if(Game1.score1 >= 1000)
                         {
                             Game1.gameState = GameState.Win;
@@ -143,7 +144,7 @@ namespace Golf_v1_0
                         
                         Game1.turn = Turn.Player2;
                         Game1.animator.LoadContentDino(content);
-                        
+                        num = 1;
                         position = new Vector2(250, 800);
                         boundingBox.X = (int)position.X;
                         boundingBox.Y = (int)position.Y;
@@ -153,14 +154,14 @@ namespace Golf_v1_0
                     }
                     else if(Game1.turn == Turn.Player2)
                     {
-                        Game1.score2 += score + 500;
+                        Game1.score2 += score + 200 / num;
                         if (Game1.score2 >= 1000)
                         {
                             Game1.gameState = GameState.Win;
                         }
                         Game1.animator.LoadContentMario(content);
                         Game1.turn = Turn.Player1;
-                       
+                        num = 1;
                         position = new Vector2(250, 800);
                         boundingBox.X = (int)position.X;
                         boundingBox.Y = (int)position.Y;
@@ -178,6 +179,7 @@ namespace Golf_v1_0
             if(Game1.gameState == GameState.Rolling && speed.X == 0 && speed.Y == 0)
             {
                 Game1.gameState = GameState.ChoseVect;
+                num++;
             }
                 
         }

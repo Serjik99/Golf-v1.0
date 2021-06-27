@@ -229,7 +229,7 @@
 /processorParam:TextureFormat=Color
 /build:Animations/mario8.png
 
-#begin arrow_outline_red_left_1.jpg
+#begin arrow_outline_red_left_1.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -239,7 +239,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:arrow_outline_red_left_1.jpg
+/build:arrow_outline_red_left_1.png
 
 #begin backGround.jpg
 /importer:TextureImporter
@@ -313,18 +313,6 @@
 /processorParam:TextureFormat=Color
 /build:BallInHole/ballinhole(0).png
 
-#begin BallInHole/ballinhole(0).png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:BallInHole/ballinhole(0).png
-
 #begin BallInHole/ballinhole(1).png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -336,30 +324,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:BallInHole/ballinhole(1).png
-
-#begin BallInHole/ballinhole(1).png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:BallInHole/ballinhole(1).png
-
-#begin BallInHole/ballinhole(2).png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:BallInHole/ballinhole(2).png
 
 #begin BallInHole/ballinhole(2).png
 /importer:TextureImporter
@@ -385,18 +349,6 @@
 /processorParam:TextureFormat=Color
 /build:BallInHole/ballinhole(3).png
 
-#begin BallInHole/ballinhole(3).png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:BallInHole/ballinhole(3).png
-
 #begin BallInHole/ballinhole(4).png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -408,30 +360,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:BallInHole/ballinhole(4).png
-
-#begin BallInHole/ballinhole(4).png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:BallInHole/ballinhole(4).png
-
-#begin BallInHole/ballinhole(5).png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:BallInHole/ballinhole(5).png
 
 #begin BallInHole/ballinhole(5).png
 /importer:TextureImporter
