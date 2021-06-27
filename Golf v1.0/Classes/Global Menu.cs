@@ -114,6 +114,7 @@ namespace Golf_v1_0
                             break;    
                         case 1:             
                             Game1.gameState = GameState.Menu;
+                            Game1.gameType = GameType.None;
                             MediaPlayer.Play(selectSound);
                             break;
                         case 2:
@@ -139,6 +140,8 @@ namespace Golf_v1_0
                             break;
                         case 1:
                             Game1.gameState = GameState.Menu;
+                            Game1.gameType = GameType.None;
+
                             MediaPlayer.Play(selectSound);
                             break;
                         case 2:
@@ -199,6 +202,7 @@ namespace Golf_v1_0
                             {
                                 MediaPlayer.Play(selectSound);
                                 Game1.gameState = GameState.SinglePlayerMenu;
+                                Game1.gameType = GameType.None;
 
                             }
                             else if (Game1.gameType == GameType.Multiplayer)

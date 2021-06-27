@@ -16,7 +16,7 @@ namespace GolfServ
         {
             try
             {
-                tcpListener = new TcpListener(IPAddress.Any, 7000);
+                tcpListener = new TcpListener(IPAddress.Parse("127.0.0.1"), 7632);
                 tcpListener.Start();
                 Console.WriteLine("Сервер запущен. Ожидание подключений...");
 
@@ -26,6 +26,7 @@ namespace GolfServ
                     new Thread(() => {
                         NetworkStream stream = tcpClient.GetStream();
                         User user = new User(stream);
+
                         Room room;
                         if (user.UserId%2==0)
                         {
