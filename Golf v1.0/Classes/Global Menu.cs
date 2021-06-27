@@ -86,12 +86,16 @@ namespace Golf_v1_0
                             MediaPlayer.Play(selectSound);
                             break;
                         case 2:             // Exit
-                            Game1.gameState = GameState.Exit;
+                            
+                            MediaPlayer.Play(selectSound);
+                            SetMP3();
                             break;
+                           
+                        case 3:
 
-
-
-
+                            Game1.gameState = GameState.Exit;
+                            
+                            break;
                     }
                 }
                 prevState = keyboardState;
@@ -130,7 +134,7 @@ namespace Golf_v1_0
                       
                         case 0:
                             Game1.gameType = GameType.Multiplayer;// Info
-                            
+                            Game1.gameState = GameState.ChoseVect;
                             MediaPlayer.Play(selectSound);
                             break;
                         case 1:
@@ -267,7 +271,30 @@ namespace Golf_v1_0
                 spriteBatch.Draw(WinTexture, new Rectangle(Game1.Width / 2 - WinTexture.Width, Game1.Height / 2 - WinTexture.Height * 6, WinTexture.Width * 2, WinTexture.Height * 2), Color.White);
             }
         }
-        
+        private void SetMP3()
+        {
+            
+            var filePath = string.Empty;
+
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+                openFileDialog.InitialDirectory = "c:\\";
+                openFileDialog.Filter = "mp3 files (*.mp3)|*.mp3";
+                openFileDialog.FilterIndex = 2;
+                openFileDialog.RestoreDirectory = true;
+
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    //Get the path of specified file
+                    filePath = openFileDialog.FileName;
+
+
+                    Game1.path = filePath;
+                   
+
+                }
+            }
+        }
       
     }
 }
