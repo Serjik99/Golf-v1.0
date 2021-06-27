@@ -16,7 +16,7 @@ namespace GolfServ
         {
             try
             {
-                tcpListener = new TcpListener(IPAddress.Any, 13000);
+                tcpListener = new TcpListener(IPAddress.Any, 7000);
                 tcpListener.Start();
                 Console.WriteLine("Сервер запущен. Ожидание подключений...");
 
@@ -40,8 +40,13 @@ namespace GolfServ
                             room = rooms[rooms.Count - 1];
                             room.user2 = user;
                             SendMessage(room.user1.Stream,"Connected");
-                            user.turn = Turn.Player1;
+                            SendMessage(room.user2.Stream, "Connected");
+                            user.turn = Turn.Player2;
+                            room.turn = Turn.Player1;
+                            
                         }
+                        while (room.turn == Turn.None)
+                        {}
                         while (true)
                         {
                             if (room.turn == user.turn)
@@ -55,6 +60,15 @@ namespace GolfServ
                                 {
                                     SendMessage(room.user1.Stream, GetMessage(user.Stream));
                                 }
+                                if (room.turn == Turn.Player1)
+                                {
+                                    room.turn = Turn.Player2;                                                            
+                                }
+                                else if (room.turn == Turn.Player2)
+                                {
+                                    room.turn = Turn.Player1;
+                                }
+                                
                             }
                             
                         }
