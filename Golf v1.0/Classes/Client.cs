@@ -6,16 +6,17 @@ using System.Net;
 using System.Text;
 using System.Threading;
 
-namespace GolfClient
+namespace Golf_v1_0
 {
-    class Program
+    class Client
     {
         private static string host = "127.0.0.1";
         private static int port = 7000;
         static TcpClient tcpClient;
         static NetworkStream network;
         public static string message;
-        static void Main(string[] args)
+        public string recievedMessage;
+        public void StartClient(string[] args)
         {
 
             
@@ -34,11 +35,12 @@ namespace GolfClient
                     {
                         if (GetMessage(network) == "Your Turn")
                         {
+                            recievedMessage = "Your Turn";
                             SendMessage(network,message);
                         }
                         else
                         {
-                            GetMessage(network);
+                            recievedMessage = GetMessage(network);
                         }
 
                         
@@ -66,6 +68,10 @@ namespace GolfClient
         {
             byte[] buffer = Encoding.UTF8.GetBytes(message);
             stream.Write(buffer, 0, buffer.Length);
+
+        }
+        public void Disconnect()
+        {
 
         }
     }
