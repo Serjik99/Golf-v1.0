@@ -8,12 +8,12 @@ namespace GolfServ
 {
     public enum Turn
     {
-        Player1, Player2
+        Player1, Player2, None
     }
     class Room
     {
         public User user1;
         public User user2;
-        public Turn turn = Turn.Player1;
+        public Turn turn = Turn.None;
     }
 }
