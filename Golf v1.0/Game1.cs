@@ -22,6 +22,10 @@ namespace Golf_v1_0
     {
         Player1, Player2
     }
+    public enum Animation
+    {
+        None, Mario, lunk
+    }
     public class Game1 : Game
     {
         
@@ -61,7 +65,9 @@ namespace Golf_v1_0
         public static int score2 = 0;
         BackGround back;
         Menu menu = new Menu();
-        Hole hole;
+        public static Hole hole;
+        public static Animation animation = Animation.None;
+        AnimationClass animator = new AnimationClass(0,0);
         
         public string whoWin;
 
@@ -113,6 +119,7 @@ namespace Golf_v1_0
             hud.LoadContent(Content);
             hole.LoadContent(Content);
             back.LoadContent(Content);
+            animator.LoadContent(Content);
 
             
                 // TODO: use this.Content to load your game content here
@@ -131,7 +138,7 @@ namespace Golf_v1_0
         protected override void Update(GameTime gameTime)
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                Exit();
+                gameState = GameState.Pause;
             keyboardState = Keyboard.GetState();
             if (keyboardState.IsKeyDown(Keys.RightAlt)&&IsMusPlaying==true&&keyboardState!=prevState)
             {
@@ -149,9 +156,12 @@ namespace Golf_v1_0
                 
                 case GameState.Menu:
                     UpdateMenu(gameTime,gmenuList);
+                    score1 = 0;
+                    score2 = 0;
                     break;
                 case GameState.SinglePlayerMenu:
                     UpdateMenu(gameTime,singlePlList);
+                    
                     
                     break;
                 case GameState.MultiplayerMenu:
@@ -160,18 +170,27 @@ namespace Golf_v1_0
                     break;
                 case GameState.ChoseVect:
                     PlayMus(path);
-                    UpdateAngArrow(gameTime);
-                    if (keyboardState.IsKeyDown(Keys.Space))
-                    {
-                        Game1.gameState = GameState.ChosePower;
-                    }
-                    if (keyboardState.IsKeyDown(Keys.Escape) && keyboardState != prevState)
-                    {
 
-                        Game1.gameState = GameState.Pause;
-                        Game1.prevGState = GameState.ChoseVect;
-                        
+                    if(animation == Animation.None)
+                    {
+                        UpdateAngArrow(gameTime);
+                        if (keyboardState.IsKeyDown(Keys.Space))
+                        {
+                            Game1.gameState = GameState.ChosePower;
+                        }
+                        if (keyboardState.IsKeyDown(Keys.Escape) && keyboardState != prevState)
+                        {
+
+                            Game1.gameState = GameState.Pause;
+                            Game1.prevGState = GameState.ChoseVect;
+
+                        }
                     }
+                    else
+                    {
+                        animator.Update(Content);
+                    }
+                    
                     hud.Update(gameTime);
                     break;
                 case GameState.Pause:
@@ -246,6 +265,7 @@ namespace Golf_v1_0
                 switch (gameState)
                 {
                     case GameState.Menu:
+                        back.Draw(_spriteBatch );
                         DrawGlobalMenu(_spriteBatch,gmenuList);
                         break;
                     case GameState.SinglePlayerMenu:
@@ -256,35 +276,57 @@ namespace Golf_v1_0
                         break;
                     case GameState.ChoseVect:
                         DrawBack(_spriteBatch);
-                        player.SetPosition((int)ball.position.X + ball.boundingBox.Height / 2, (int)ball.position.Y + ball.boundingBox.Height / 2, 100, 50);
-                        ball.Draw(_spriteBatch);
-                        DrawAngling(_spriteBatch);
+                        if(animation == Animation.Mario)
+                        {
+                            ball.Draw(_spriteBatch);
+                            hole.Draw(_spriteBatch);
+                            animator.Draw(_spriteBatch);
+                        }
+                        else if(animation == Animation.lunk)
+                        {
+                            hole.Draw(_spriteBatch);
+                        }
+                        else
+                        {
+                            hole.SetTexture(Content, "hole(0)");
+                            player.SetPosition((int)ball.position.X + ball.boundingBox.Height / 2, (int)ball.position.Y + ball.boundingBox.Height / 2, 100, 50);
+                            DrawAngling(_spriteBatch);
+                            hole.Draw(_spriteBatch);
+                            ball.Draw(_spriteBatch);
+
+                        }
                         DrawHud(_spriteBatch);
                     
                         break;
                     case GameState.ChosePower:
-                        ball.Draw(_spriteBatch);
+                        
                         DrawBack(_spriteBatch);
-
+                        hole.Draw(_spriteBatch);
                         DrawAngling(_spriteBatch);
+                     
+                        ball.Draw(_spriteBatch);
                         DrawHud(_spriteBatch);
                         hole.Draw(_spriteBatch);
                         break;
                     case GameState.Pause:
                         DrawBack(_spriteBatch);
+                        hole.Draw(_spriteBatch);
+                        ball.Draw(_spriteBatch);
                         DrawGlobalMenu(_spriteBatch, Gpause);
                         
                         break;
                     case GameState.Rolling:
                         DrawBack(_spriteBatch);
+                        hole.Draw(_spriteBatch);
+                        ball.Draw(_spriteBatch);
                         break;
                     case GameState.GameOver:
                         
                         break;
                 }
             }
-            hole.Draw(_spriteBatch);
-            ball.Draw(_spriteBatch);
+            
+            
             _spriteBatch.End();
 
             base.Draw(gameTime);

@@ -153,8 +153,8 @@ namespace Golf_v1_0
 
 
                     }
-                    
-                    texture = content.Load<Texture2D>("golfBall(0)");
+                    Game1.animation = Animation.lunk;
+                    //texture = content.Load<Texture2D>("golfBall(0)");
                     //hole.SetTexture(content, "hole_with_ball");
                     speed = new Vector2(0, 0);
                 }
