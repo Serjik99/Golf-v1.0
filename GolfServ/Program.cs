@@ -1,4 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net.Sockets;
+using System.Net;
+using System.Text;
+using System.Threading;
 
 namespace GolfServ
 {
@@ -6,7 +12,7 @@ namespace GolfServ
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            
         }
     }
 }
