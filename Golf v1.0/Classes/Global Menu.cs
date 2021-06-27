@@ -23,6 +23,8 @@ namespace Golf_v1_0
         Texture2D singlePlTexture;
         Texture2D mpTExture;
         Texture2D PauseTexture;
+        Texture2D WinTexture;
+        Texture2D LoseTexture;
         private Song changeSound;
         private Song selectSound;
         int selected;
@@ -39,8 +41,11 @@ namespace Golf_v1_0
             singlePlTexture = content.Load<Texture2D>(@"MenuContent\SinglePlayer");
             mpTExture = content.Load<Texture2D>(@"MenuContent\MultiPlayer");
             PauseTexture = content.Load<Texture2D>(@"MenuContent\Pause");
+            LoseTexture = content.Load<Texture2D>("Lose1");
+            WinTexture = content.Load<Texture2D>("WinPart1");
             changeSound = content.Load<Song>(@"MenuContent\button-37a");
             selectSound = content.Load<Song>(@"MenuContent\3a7ee48dc00822f");
+            
         }
         public void Update(GameTime gameTime,List<string> blist)
         {
@@ -226,7 +231,11 @@ namespace Golf_v1_0
             }
             else if (Game1.gameState == GameState.GameOver)
             {
-
+                spriteBatch.Draw(LoseTexture, new Rectangle(Game1.Width / 2 - LoseTexture.Width, Game1.Height / 2 - LoseTexture.Height * 6, LoseTexture.Width * 2, LoseTexture.Height * 2), Color.White);
+            }
+            else if (Game1.gameState == GameState.Win)
+            {
+                spriteBatch.Draw(WinTexture, new Rectangle(Game1.Width / 2 - WinTexture.Width, Game1.Height / 2 - WinTexture.Height * 6, WinTexture.Width * 2, WinTexture.Height * 2), Color.White);
             }
         }
         private void SetMP3()
