@@ -42,7 +42,7 @@ namespace Golf_v1_0
 
         public void LoadContent(ContentManager content)
         {
-            texture = content.Load<Texture2D>("balltexture(0)");
+            texture = content.Load<Texture2D>("ballAnimation/ball(0)");
             boundingBox = new Rectangle((int)position.X, (int)position.Y, 64, 64);
             textureNumber = 0;
             colision = new Rectangle((int)position.X + 10, (int)position.Y + 10, 44, 44);
@@ -73,13 +73,22 @@ namespace Golf_v1_0
 
                 if (speed.X != 0 || speed.Y != 0)
                 {
-                    if (textureNumber == 10)
+                    if (textureNumber < 15)
                     {
-                        texture = content.Load<Texture2D>("Ball(0)");
+                        texture = content.Load<Texture2D>("ballAnimation/ball(1)");
                     }
-                    if (textureNumber >= 20)
+                    if (textureNumber >= 15 && textureNumber < 30)
                     {
-                        texture = content.Load<Texture2D>("balltexture(0)");
+                        texture = content.Load<Texture2D>("ballAnimation/ball(3)");
+                        
+                    }
+                    if(textureNumber >= 30 && textureNumber < 45)
+                    {
+                        texture = content.Load<Texture2D>("ballAnimation/ball(0)");
+                       
+                    }
+                    if(textureNumber >= 45)
+                    {
                         textureNumber = 0;
                     }
                 }
@@ -124,13 +133,14 @@ namespace Golf_v1_0
 
                     if(Game1.turn == Turn.Player1)
                     {
-                        Game1.score1 += score + 100;
+                        Game1.score1 += score + 500;
                         if(Game1.score1 >= 1000)
                         {
                             Game1.gameState = GameState.Win;
                         }
-                        Game1.animation = Animation.Mario;
+                        
                         Game1.turn = Turn.Player2;
+                        Game1.animator.LoadContentDino(content);
                         position = new Vector2(250, 800);
                         boundingBox.X = (int)position.X;
                         boundingBox.Y = (int)position.Y;
@@ -140,12 +150,12 @@ namespace Golf_v1_0
                     }
                     else if(Game1.turn == Turn.Player2)
                     {
-                        Game1.score2 += score + 100;
+                        Game1.score2 += score + 500;
                         if (Game1.score2 >= 1000)
                         {
                             Game1.gameState = GameState.Win;
                         }
-                        
+                        Game1.animator.LoadContentMario(content);
                         Game1.turn = Turn.Player1;
                         position = new Vector2(250, 800);
                         boundingBox.X = (int)position.X;

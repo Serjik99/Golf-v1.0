@@ -24,7 +24,7 @@ namespace Golf_v1_0
     }
     public enum Animation
     {
-        None, Mario, lunk
+        None, Mario, lunk , Dino
     }
     public class Game1 : Game
     {
@@ -71,7 +71,7 @@ namespace Golf_v1_0
         Menu menu = new Menu();
         public static Hole hole;
         public static Animation animation = Animation.None;
-        AnimationClass animator = new AnimationClass(0,0);
+        public static AnimationClass animator = new AnimationClass(0,0);
         
         public string whoWin;
 
@@ -123,7 +123,7 @@ namespace Golf_v1_0
             hud.LoadContent(Content);
             hole.LoadContent(Content);
             back.LoadContent(Content);
-            animator.LoadContent(Content);
+            animator.LoadContentMario(Content);
 
             
                 // TODO: use this.Content to load your game content here
@@ -291,7 +291,7 @@ namespace Golf_v1_0
                         break;
                     case GameState.ChoseVect:
                         DrawBack(_spriteBatch);
-                        if(animation == Animation.Mario)
+                        if(animation == Animation.Mario || animation == Animation.Dino)
                         {
                             ball.Draw(_spriteBatch);
                             hole.Draw(_spriteBatch);

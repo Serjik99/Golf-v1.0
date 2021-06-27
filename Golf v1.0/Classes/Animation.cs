@@ -7,7 +7,7 @@ using System;
 
 namespace Golf_v1_0
 {
-    class AnimationClass
+    public class AnimationClass
     {
         Vector2 position = new Vector2();
         int sprite = 0;
@@ -47,25 +47,54 @@ namespace Golf_v1_0
                 iter += 1;
                 if (iter % 10 == 0)
                 {
+
                     sprite++;
-                    Game1.hole.SetTexture(content, "Animations/mario"+sprite);
+                    if (sprite == 8)
+                    {
+                        if(Game1.turn == Turn.Player1)
+                        {
+                            Game1.animation = Animation.Mario;
+                        }
+                        else
+                        {
+                            Game1.animation = Animation.Dino;
+                        }
+                        iter = 0;
+                        sprite = 0;
+                    }
+                    else
+                    {
+                        Game1.hole.SetTexture(content, "Animations/mario" + sprite);
+                    }
+                    
+                }
+            }
+            else if(Game1.animation == Animation.Dino)
+            {
+                iter += 1;
+                if (iter % 10 == 0)
+                {
+                    sprite++;
+                    texture = content.Load<Texture2D>("Animations/dino" + sprite);
                 }
                 if (sprite == 8)
                 {
-                    Game1.animation = Animation.Mario;
+                    Game1.animation = Animation.None;
                     iter = 0;
                     sprite = 0;
                 }
-                
-                
             }
             
 
         }
 
-        public void LoadContent(ContentManager content)
+        public void LoadContentMario(ContentManager content)
         {
             texture = content.Load<Texture2D>("Animations/mario0");
+        }
+        public void LoadContentDino(ContentManager content)
+        {
+            texture = content.Load<Texture2D>("Animations/dino0");
         }
 
         public void Draw(SpriteBatch spriteBatch)
