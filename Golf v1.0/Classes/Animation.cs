@@ -9,6 +9,7 @@ namespace Golf_v1_0
 {
     public class AnimationClass
     {
+        Random random = new Random();
         Vector2 position = new Vector2();
         int sprite = 0;
         int iter = 0;
@@ -49,7 +50,7 @@ namespace Golf_v1_0
                 {
 
                     sprite++;
-                    if (sprite == 8)
+                    if (sprite == 6)
                     {
                         if(Game1.turn == Turn.Player1)
                         {
@@ -61,10 +62,13 @@ namespace Golf_v1_0
                         }
                         iter = 0;
                         sprite = 0;
+                        Game1.hole.SetPosition(new Vector2(random.Next(50, 850), random.Next(76, 300)));
+                        
                     }
                     else
                     {
-                        Game1.hole.SetTexture(content, "Animations/mario" + sprite);
+                        Game1.hole.SetRectangle(100, 100);
+                        Game1.hole.SetTexture(content, "BallInHole/ballinhole(" + sprite + ")");
                     }
                     
                 }

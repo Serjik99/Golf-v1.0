@@ -10,6 +10,8 @@ namespace Golf_v1_0
 {
     class Ball
     {
+
+        Random random = new Random();
         double force;
         Vector2 speed;
         double acceleration = 0.1;
@@ -141,6 +143,7 @@ namespace Golf_v1_0
                         
                         Game1.turn = Turn.Player2;
                         Game1.animator.LoadContentDino(content);
+                        
                         position = new Vector2(250, 800);
                         boundingBox.X = (int)position.X;
                         boundingBox.Y = (int)position.Y;
@@ -157,6 +160,7 @@ namespace Golf_v1_0
                         }
                         Game1.animator.LoadContentMario(content);
                         Game1.turn = Turn.Player1;
+                       
                         position = new Vector2(250, 800);
                         boundingBox.X = (int)position.X;
                         boundingBox.Y = (int)position.Y;

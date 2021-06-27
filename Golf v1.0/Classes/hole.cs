@@ -13,8 +13,8 @@ namespace Golf_v1_0
     {
         Random random = new Random();
         Texture2D texture;
-        Vector2 position;
-        Rectangle holeRectangle;
+        static Vector2 position;
+        public static Rectangle holeRectangle;
         Rectangle colision;
 
         public Hole(int x , int y)
@@ -33,11 +33,13 @@ namespace Golf_v1_0
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(texture, holeRectangle, Color.White);
-            spriteBatch.Draw(texture, colision, Color.Red);
+           // spriteBatch.Draw(texture, colision, Color.Red);
         }
         public void SetPosition(Vector2 pos)
         {
             position = pos;
+            holeRectangle = new Rectangle((int)position.X, (int)position.Y, 100, 26);
+            colision = new Rectangle((int)position.X - 5, (int)position.Y - 5, 90, 16);
         }
         public void SetTexture(ContentManager content, string texture_name)
         {
@@ -48,7 +50,13 @@ namespace Golf_v1_0
         {
             return colision;
         }
-
+        public void SetRectangle(int x , int y)
+        {
+            holeRectangle.X = (int)position.X;
+            holeRectangle.Y = (int)position.Y - 74;
+            holeRectangle.Width = x;
+            holeRectangle.Height = y;
+        }
         
     }
 }

@@ -230,7 +230,7 @@ namespace Golf_v1_0
                     hud.Update(gameTime);
 
                     PlayMus(path);
-                player.rect.Width = player.texture.Width/ 2;
+                    player.rect.Width = player.texture.Width/ 2;
                     ball.Update(Content,hole);
                     player.rect.Width = player.texture.Width;
                     break;
@@ -240,6 +240,9 @@ namespace Golf_v1_0
                 case GameState.Win:
                     gmenu.Update(gameTime, GEnd);
                     hud.Update(gameTime);
+                    score1 = 0;
+                    score2 = 0;
+                    animator.LoadContentMario(Content);
                     break;
                 case GameState.Exit:
                     this.Exit();
@@ -305,7 +308,6 @@ namespace Golf_v1_0
                         {
                             hole.SetTexture(Content, "hole(0)");
                             player.SetPosition((int)ball.position.X + ball.boundingBox.Height / 2, (int)ball.position.Y + ball.boundingBox.Height / 2, 100, 50);
-                            
                             hole.Draw(_spriteBatch);
                             DrawAngling(_spriteBatch);
                             ball.Draw(_spriteBatch);
