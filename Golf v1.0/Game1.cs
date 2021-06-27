@@ -41,7 +41,7 @@ namespace Golf_v1_0
         };
         private List<string> GEnd = new List<string>()
         {
-            "MainMenu","Continue","Exit"
+            "Continue","Exit"
         };
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
@@ -191,12 +191,12 @@ namespace Golf_v1_0
                     break;
                 case GameState.ChosePower:
                     hud.Update(gameTime);
-<<<<<<< HEAD
+
                     
                     
-=======
+
                     player.Update(gameTime);
->>>>>>> phantom
+
                     if (keyboardState.IsKeyDown(Keys.Space) && keyboardState!= prevState)
                     {
                         Game1.gameState = GameState.Rolling;
@@ -212,11 +212,9 @@ namespace Golf_v1_0
                     break;
                 case GameState.Rolling:
                     hud.Update(gameTime);
-<<<<<<< HEAD
+
                     PlayMus(path);
-=======
->>>>>>> phantom
-                    player.rect.Width = player.texture.Width/ 2;
+                player.rect.Width = player.texture.Width/ 2;
                     ball.Update(Content,hole);
                     player.rect.Width = player.texture.Width;
                     break;
@@ -225,14 +223,12 @@ namespace Golf_v1_0
                     break;
                 case GameState.Win:
                     gmenu.Update(gameTime, GEnd);
+                    hud.Update(gameTime);
                     break;
                 case GameState.Exit:
                     this.Exit();
                     break;
-                case GameState.Win:
-                    hud.Update(gameTime);
-                    //вывести вигравшего по очкам плеера
-                    break;
+               
 
             }
             prevState = keyboardState;
@@ -279,7 +275,7 @@ namespace Golf_v1_0
                     case GameState.ChoseVect:
                         back.Draw(_spriteBatch);
                         player.SetPosition((int)ball.position.X + ball.boundingBox.Height / 2, (int)ball.position.Y + ball.boundingBox.Height / 2, 100, 50);
-<<<<<<< HEAD
+
                         ball.Draw(_spriteBatch);
                         DrawAngling(_spriteBatch);
                         DrawHud(_spriteBatch);
@@ -292,18 +288,11 @@ namespace Golf_v1_0
                         DrawAngling(_spriteBatch);
                         DrawHud(_spriteBatch);
                         hole.Draw(_spriteBatch);
-=======
-                        player.DrawAngle(_spriteBatch);
-                        hud.Draw(_spriteBatch);
-                        break;
-                    case GameState.ChosePower:
-
-                        back.Draw(_spriteBatch);
 
                         player.DrawAngle(_spriteBatch);
                         hud.Draw(_spriteBatch);
->>>>>>> phantom
                         break;
+                    
                     case GameState.Pause:
                         back.Draw(_spriteBatch);
                         gmenu.Draw(_spriteBatch, Gpause);

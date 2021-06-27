@@ -185,6 +185,38 @@ namespace Golf_v1_0
                 }
 
             }
+            else if ((Game1.gameState == GameState.Win || Game1.gameState == GameState.GameOver) && keyboardState != prevState)
+            {
+                if (keyboardState.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.Enter))
+                {
+                    switch (selected)
+                    {
+
+                        case 0:
+
+                            if (Game1.gameType == GameType.SinglePlayer)
+                            {
+                                MediaPlayer.Play(selectSound);
+                                Game1.gameState = GameState.SinglePlayerMenu;
+
+                            }
+                            else if (Game1.gameType == GameType.Multiplayer)
+                            {
+                                MediaPlayer.Play(selectSound);
+                                Game1.gameState = GameState.MultiplayerMenu;
+                            }
+                                break;
+                        case 1:
+                            MediaPlayer.Play(selectSound);
+                            Game1.gameState = GameState.Exit;
+
+                            break;
+                        
+
+                    }
+                }
+
+            }
             prevState = keyboardState;
            
         }
