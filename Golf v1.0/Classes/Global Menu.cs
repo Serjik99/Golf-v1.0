@@ -104,6 +104,7 @@ namespace Golf_v1_0
                     {
                         case 0:
                             Game1.gameType = GameType.SinglePlayer;
+                            Game1.animation = Animation.Mario;
                             Game1.gameState = GameState.ChoseVect;
                             MediaPlayer.Play(selectSound);
                             break;    

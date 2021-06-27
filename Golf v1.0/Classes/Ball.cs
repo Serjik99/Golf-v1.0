@@ -129,6 +129,7 @@ namespace Golf_v1_0
                         {
                             Game1.gameState = GameState.Win;
                         }
+                        Game1.animation = Animation.Mario;
                         Game1.turn = Turn.Player2;
                         position = new Vector2(250, 800);
                         boundingBox.X = (int)position.X;
@@ -144,6 +145,7 @@ namespace Golf_v1_0
                         {
                             Game1.gameState = GameState.Win;
                         }
+                        
                         Game1.turn = Turn.Player1;
                         position = new Vector2(250, 800);
                         boundingBox.X = (int)position.X;
@@ -153,8 +155,8 @@ namespace Golf_v1_0
 
 
                     }
-                    
-                    texture = content.Load<Texture2D>("golfBall(0)");
+                    Game1.animation = Animation.lunk;
+                    //texture = content.Load<Texture2D>("golfBall(0)");
                     //hole.SetTexture(content, "hole_with_ball");
                     speed = new Vector2(0, 0);
                 }

@@ -9,7 +9,7 @@ using System;
 namespace Golf_v1_0
 {
     
-    class Hole
+    public class Hole
     {
         Random random = new Random();
         Texture2D texture;
